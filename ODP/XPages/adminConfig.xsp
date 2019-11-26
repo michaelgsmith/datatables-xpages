@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xp:this.data>
+		<xp:dominoDocument var="configDoc" formName="configDocument">
+			<xp:this.action><![CDATA[#{javascript:viewScope.configDocid == null ? "createDocument" : "editDocument"}]]></xp:this.action>
+			<xp:this.documentId><![CDATA[#{javascript:viewScope.configDocid == null ? "" : viewScope.configDocid}]]></xp:this.documentId>
+		</xp:dominoDocument>
+	</xp:this.data>
+	<xp:this.beforePageLoad><![CDATA[#{javascript:// try to find a config doc
+var docid = @DbLookup(@DbName(),"vwConfig","config",1,"[RETURNDOCUMENTUNIQUEID]");
+viewScope.configDocid=docid;
+print("docid="+docid)}]]></xp:this.beforePageLoad>
+	<div class="level0-flex-container">
+		<div class="level0-flex-item">
+ 
+			<xc:ccNav></xc:ccNav>
+		</div>
+		<div class="level0-flex-item">
+
+			<xp:table id="tableConfig" style="width:50%;margin-top:25px"
+				styleClass="tableBasic">
+				<xp:tr>
+					<xp:td style="width:200px">
+						<xp:label value="Rest Service Path" id="label1"></xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:inputText id="inputText1" value="#{configDoc.restPath}"
+							styleClass="form-control input-sm" style="width:100%">
+							<xp:this.attrs>
+								<xp:attr name="placeholder" value="Leave blank for current database">
+								</xp:attr>
+							</xp:this.attrs>
+						</xp:inputText>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td style="vertical-align:top">
+						<xp:label value="Servers" id="label3"></xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:inputTextarea id="inputTextarea2"
+							multipleSeparator="#{javascript:@NewLine()}" rows="10"
+							value="#{configDoc.servers}" style="width:100%" styleClass="form-control">
+							<xp:this.attrs>
+								<xp:attr name="placeholder" value="Enter one value per line">
+								</xp:attr>
+							</xp:this.attrs>
+						</xp:inputTextarea>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td style="vertical-align:top">
+						<xp:label value="Databases" id="label2"></xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:inputTextarea id="inputTextarea1"
+							multipleSeparator="#{javascript:@NewLine()}" rows="10"
+							value="#{configDoc.databases}" style="width:100%" styleClass="form-control">
+							<xp:this.attrs>
+								<xp:attr name="placeholder" value="Enter one value per line in the format 'description~path/mydb.nsf'">
+								</xp:attr>
+							</xp:this.attrs>
+						</xp:inputTextarea>
+					</xp:td>
+				</xp:tr>
+				<tr>
+					<td colspan="2">
+						<xp:button id="button1" value="Save" styleClass="btn btn-primary">
+							<xp:eventHandler event="onclick" submit="true"
+								refreshMode="partial" refreshId="tableConfig">
+								<xp:this.action><![CDATA[#{javascript:configDoc.save()}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:button>
+						<xp:button value="Create View Definition" id="button2"
+							styleClass="btn btn-warning" style="margin-left:10px">
+							<xp:eventHandler event="onclick" submit="false">
+
+								<xp:this.script><![CDATA[href = location.href;
+location.href = href.split(".nsf")[0] + ".nsf/adminViewDefinitionDoc.xsp";
+return false;
+parent.tabs.loadTab({
+	type: "doc",
+	xpage: "adminViewDefinitionDoc",
+	module: "admin",
+	key: "new-view-def",
+	tab:"new-view-def"
+});
+return false]]></xp:this.script>
+							</xp:eventHandler>
+						</xp:button>
+					</td>
+
+				</tr>
+			</xp:table>
+
+		</div>
+	</div>
+</xp:view>

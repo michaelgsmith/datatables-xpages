@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<div class="navbar navbar-inverse" role="navigation">
+		<div class="navbar-header">
+
+			<ul class="nav navbar-nav">
+				<xp:panel tagName="li">
+					<a class="navbar-brand" href="main.xsp">Main</a>
+				</xp:panel>
+				<xp:panel tagName="li">
+					<xp:this.attrs>
+						<xp:attr name="class">
+							<xp:this.value><![CDATA[#{javascript:view.getPageName().indexOf("adminConfig") > -1 ? "active" : ""}]]></xp:this.value>
+						</xp:attr>
+					</xp:this.attrs>  
+					<a class="navbar-brand" href="adminConfig.xsp">
+						Configuration
+					</a>
+				</xp:panel>
+				<xp:panel tagName="li">
+				<xp:this.attrs>
+						<xp:attr name="class">
+							<xp:this.value><![CDATA[#{javascript:view.getPageName().indexOf("adminViewDefinitions") > -1 ? "active" : ""}]]></xp:this.value>
+						</xp:attr>
+					</xp:this.attrs>
+					<a class="navbar-brand"
+						href="adminViewDefinitions.xsp">
+						View Definitions
+					</a>
+				</xp:panel>
+			</ul>
+		</div>
+	</div>
+</xp:view>

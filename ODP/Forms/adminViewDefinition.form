@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.lotus.com/dxl" name="adminViewDefinition" publicaccess="false" renderpassthrough="true">
+  <code event="windowtitle">
+    <formula>"Field Definitions"</formula>
+  </code>
+  <body>
+    <richtext>
+      <pardef id="1"/>
+      <par def="1"/>
+      <pardef id="2" hide="notes web"/>
+      <par def="2">
+        <run>
+          <font size="12pt" style="bold" color="red"/>Form/View: 		</run>
+        <run>
+          <font size="12pt" color="red" style="bold"/>
+          <field type="text" kind="editable" name="forForm"/>
+        </run>
+        <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="10" containertype="65418" aftercontainercount="1" afterbegincount="3">
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata>
+        <run>
+          <font size="12pt" style="bold" color="red"/>
+        </run>
+      </par>
+      <par def="2">
+        <run>
+          <font size="12pt" style="bold" color="red"/>Export View:	</run>
+        <run>
+          <font size="12pt" color="red" style="bold"/>
+          <field type="text" kind="editable" name="useView"/>
+        </run>
+        <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="9" containertype="65418" aftercontainercount="1" afterbegincount="3">
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata>
+        <run>
+          <font size="12pt" style="bold" color="red"/>
+        </run>
+      </par>
+      <par def="1">
+        <run>
+          <font size="12pt" style="bold"/>Key:			</run>
+        <run>
+          <font size="12pt" style="bold"/>
+          <field type="text" kind="editable" name="key"/>
+        </run>
+        <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="6" containertype="65418" aftercontainercount="1" afterbegincount="3">
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata>
+        <run>
+          <font size="12pt" style="bold"/>
+        </run>
+      </par>
+      <par def="1">
+        <run>
+          <font size="12pt" style="bold"/>
+        </run>
+        <run>
+          <font size="12pt" style="bold"/>
+          <field type="text" allowmultivalues="true" kind="editable" name="keyAdd" listinputseparators="comma semicolon" listdisplayseparator="semicolon"/>
+        </run>
+        <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="6" containertype="65418" aftercontainercount="1" afterbegincount="3">
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata>
+        <run>
+          <font size="12pt" style="bold"/>
+        </run>
+      </par>
+      <par def="1">
+        <run>
+          <font size="12pt" style="bold"/>Key Params:	</run>
+        <run>
+          <font size="12pt" style="bold"/>
+          <field type="text" allowmultivalues="true" kind="editable" name="keyParams" listinputseparators="comma semicolon" listdisplayseparator="semicolon"/>
+        </run>
+        <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="6" containertype="65418" aftercontainercount="1" afterbegincount="3">
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata>
+        <run>
+          <font size="12pt" style="bold"/>
+        </run>
+      </par>
+      <par def="1">
+        <run>
+          <font size="12pt" style="bold"/>Key Index:		</run>
+        <run>
+          <font size="12pt" style="bold"/>
+          <field type="number" kind="editable" name="keyIndex">
+            <numberformat format="general" digits="2" punctuated="false" parens="false" percent="false" bytes="false"/>
+            <code event="defaultvalue">
+              <formula>0</formula>
+            </code>
+          </field>
+        </run>
+        <run>
+          <font size="12pt" style="bold"/>
+        </run>
+      </par>
+      <par def="1">
+        <run>
+          <font size="12pt" style="bold"/>Database:		</run>
+        <run>
+          <font size="12pt" style="bold"/>
+          <field type="text" kind="editable" name="database"/>
+        </run>
+        <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="6" containertype="65418" aftercontainercount="1" afterbegincount="3">
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata>
+      </par>
+      <par def="1">
+        <run>
+          <font size="12pt" style="bold"/>Display View:	</run>
+        <run>
+          <font size="12pt" style="bold"/>
+          <field type="text" kind="editable" name="displayView"/>
+        </run>
+        <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="6" containertype="65418" aftercontainercount="1" afterbegincount="3">
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata>
+        <run>
+          <font size="12pt" style="bold"/>
+        </run>
+      </par>
+      <par def="1">
+        <run>
+          <font size="12pt" style="bold"/>Filter:			</run>
+        <run>
+          <font size="12pt" style="bold"/>
+          <field type="text" kind="editable" name="filter"/>
+        </run>
+        <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="6" containertype="65418" aftercontainercount="1" afterbegincount="3">
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata>
+        <run>
+          <font size="12pt" style="bold"/>
+        </run>
+      </par>
+      <par def="2">
+        <run>
+          <font size="12pt" style="bold" color="red"/>View Panel:		</run>
+        <run>
+          <font size="12pt" color="red" style="bold"/>
+          <field type="text" kind="editable" name="viewPanel"/>
+        </run>
+        <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="9" containertype="65418" aftercontainercount="1" afterbegincount="3">
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata>
+        <run>
+          <font size="12pt" style="bold" color="red"/>
+        </run>
+      </par>
+      <par def="1">
+        <run>
+          <font size="12pt" style="bold"/>Sort Column:	</run>
+        <run>
+          <font size="12pt" style="bold"/>
+          <field type="text" kind="editable" name="sortColumn"/>
+        </run>
+        <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="6" containertype="65418" aftercontainercount="1" afterbegincount="3">
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata>
+        <run>
+          <font size="12pt" style="bold"/>
+        </run>
+      </par>
+      <par def="1">
+        <run>
+          <font size="12pt" style="bold"/>Sort Order:		</run>
+        <run>
+          <font size="12pt" style="bold"/>
+          <field borderstyle="none" lookupeachchar="false" lookupaddressonrefresh="false" type="keyword" kind="editable" name="sortOrder">
+            <keywords helperbutton="false" columns="2" ui="radiobutton">
+              <textlist>
+                <text>ascending</text>
+                <text>descending</text>
+              </textlist>
+            </keywords>
+            <code event="inputtranslation">
+              <formula>@If(sortColumn = "" ; "";@ThisValue)</formula>
+            </code>
+          </field>
+        </run>
+        <run>
+          <font size="12pt" style="bold"/>
+        </run>
+      </par>
+      <par def="2">
+        <run>
+          <font size="12pt" style="bold" color="red"/>Export Sort Col:	</run>
+        <run>
+          <font size="12pt" color="red" style="bold"/>
+          <field type="text" kind="editable" name="sortColumnExport"/>
+        </run>
+        <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="9" containertype="65418" aftercontainercount="1" afterbegincount="3">
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata>
+        <run>
+          <font size="12pt" style="bold" color="red"/>
+        </run>
+      </par>
+      <par def="2">
+        <run>
+          <font size="12pt" style="bold" color="red"/>Export Sort Ord:	</run>
+        <run>
+          <font size="12pt" color="red" style="bold"/>
+          <field borderstyle="none" lookupeachchar="false" lookupaddressonrefresh="false" type="keyword" kind="editable" name="sortOrderExport">
+            <keywords helperbutton="false" columns="2" ui="radiobutton">
+              <textlist>
+                <text>ascending</text>
+                <text>descending</text>
+              </textlist>
+            </keywords>
+            <code event="inputtranslation">
+              <formula>@If(sortColumnExport = "" ; "";@ThisValue)</formula>
+            </code>
+          </field>
+        </run>
+        <run>
+          <font size="12pt" style="bold" color="red"/>
+        </run>
+      </par>
+      <par def="1">
+        <run>
+          <font size="12pt" style="bold"/>Category Filter:	</run>
+        <run>
+          <font size="12pt" style="bold"/>
+          <field type="text" kind="editable" name="categoryFilter"/>
+        </run>
+        <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="6" containertype="65418" aftercontainercount="1" afterbegincount="3">
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata>
+        <run>
+          <font size="12pt" style="bold"/>
+        </run>
+      </par>
+      <par def="1"/>
+      <par def="2">
+        <run>
+          <font style="bold" color="red"/>Memo Definition:</run>
+      </par>
+      <par def="2">
+        <run>
+          <font color="red"/>
+        </run>
+        <run>
+          <font color="red" name="monospace"/>
+          <field type="text" allowmultivalues="true" kind="editable" name="fieldDef" listinputseparators="comma semicolon newline" listdisplayseparator="newline"/>
+        </run>
+        <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="9" containertype="65418" aftercontainercount="1" afterbegincount="3">
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata>
+        <run>
+          <font name="monospace" color="red"/>
+        </run>
+      </par>
+      <par def="2">
+        <run>
+          <font color="red"/>
+        </run>
+      </par>
+      <par def="2">
+        <run>
+          <font style="bold" color="red"/>Export Definition:</run>
+      </par>
+      <par def="2">
+        <run>
+          <font color="red"/>
+        </run>
+        <run>
+          <font color="red" name="monospace"/>
+          <field type="text" allowmultivalues="true" kind="editable" name="fieldDefExport" listinputseparators="comma semicolon newline" listdisplayseparator="newline"/>
+        </run>
+        <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="9" containertype="65418" aftercontainercount="1" afterbegincount="3">
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata>
+        <run>
+          <font name="monospace" color="red"/>
+        </run>
+      </par>
+      <par def="1">
+        <run>
+          <font name="monospace"/>
+        </run>
+      </par>
+      <par def="1">
+        <run>
+          <font style="bold"/>Column Definitions:</run>
+      </par>
+      <par def="1">
+        <run>
+          <font name="monospace"/>
+          <field type="text" kind="editable" name="viewJson"/>
+        </run>
+        <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="6" containertype="65418" aftercontainercount="1" afterbegincount="3">
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata>
+        <run>
+          <font name="monospace"/>
+        </run>
+      </par>
+      <par def="1">
+        <run>
+          <font name="monospace"/>
+        </run>
+      </par>
+    </richtext>
+  </body>
+  <item name="keyIndex" summary="false">
+    <number>0</number>
+  </item>
+</form>

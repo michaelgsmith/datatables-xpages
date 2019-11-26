@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	
+	<xe:restService id="restService2" pathInfo="view-definitions"
+		state="false">
+		<xe:this.service>
+			<xe:viewJsonService systemColumns="2"
+				viewName="vwAdminViewDefinitions" defaultColumns="true"
+				count="1000">
+				<xe:this.databaseName><![CDATA[#{javascript:@DbName()[0]+"!!"+@DbName()[1]}]]></xe:this.databaseName>
+			</xe:viewJsonService>
+		</xe:this.service>
+	</xe:restService>
+</xp:view>

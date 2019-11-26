@@ -1,0 +1,207 @@
+/*************************************
+  Layout Classes
+*************************************/
+.level0-flex-container {
+	display:flex;
+	flex-direction:column;
+	height:calc(100vh - 60px);	
+	height:100vh;
+}
+.level0-flex-middle {
+	flex:1;
+	display:flex;
+	flex-direction:row;
+	height:100vh;
+	position:relative;
+
+}
+.level0-flex-nav {
+	flex:1;
+	flex-basis: auto;
+	flex-grow: 0;
+	position:relative;
+	width:200px;
+	background: #f3f3f3;
+	background: #000;
+	flex-grow:1;
+	padding:100px 10px 25px 25px;
+	font-weight:bold;
+	color: #fff;
+	opacity: .66;
+	box-shadow: inset -1px 0 0 0 #cfcfca;
+	font-family:Roboto;
+}
+.level0-flex-nav .nav li.active>a {
+    color: #fff;
+    opacity: 1;
+    background: hsla(0,0%,100%,.23);
+}
+.level0-flex-nav .nav li>a {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 5px 15px 0;
+    border-radius: 4px;
+    color: #fff;
+    opacity: .86;
+}
+.level0-flex-nav .nav>li>a:hover  {
+	background: #eee;
+	color:#222;
+	opacity:.75;
+}
+.level0-flex-view {
+	display:flex;
+	flex-direction:column;
+	flex:1;
+	flex-basis:auto;
+	position:relative;
+	width:calc(100% - 300px);
+	
+}
+.level0-flex-item {
+	flex:1;
+	flex-basis: auto;
+	flex-grow: 0;
+	position:relative;
+}
+
+.level0-flex-footer {
+	flex:1;
+	flex-grow:0;
+	position:relative;
+	height:100px;
+	flex-basis:auto;
+	color:#fff;
+	font-size:18px;
+	text-align:center;
+	background:red;	
+}
+
+/*  end Layout */
+
+
+/* View Definitions */
+.panelFormViewDef {
+	padding-top:25px;
+}
+.panelFormViewDef, .tableBasic td {
+	padding:3px;
+}
+
+.viewDefinitionColumns td {
+	padding:3px;
+	vertical-align:middle;
+}
+.viewDefinitionColumns td .checkbox {
+	min-height:20px;	
+}
+.view-def-width {
+	width:50px;
+	display:inline;
+}
+.tableViewDefinition {
+	margin-bottom:10px	
+}
+.tableViewDefinition tr td:nth-child(4) {
+	border-left:1px solid #ddd;
+	padding-left:15px;	
+}
+/* end View Definitions */
+
+/* ccRestView */
+.bodyAdminViewDefinitions {
+	overflow:hidden
+}
+.panelRestViewContainer {
+	display:flex;
+	flex-direction:column;
+	height:auto;
+	position:relative;
+	flex:1;
+}
+.panelRestViewContainer.no-fixed-header {
+	flex-basis:auto;
+	overflow:auto;
+	height:0px;	
+}
+.ffDefault {
+	flex:1;
+	flex-grow:0;
+	flex-basis:auto;
+	height:35px;
+	position:relative;
+}
+.loading-container {
+	display:none;
+	text-align:center;
+	position:absolute;
+	width:300px;
+	height:200px;
+	border:1px solid #999;
+	margin:atuo;
+	left:50%;
+	margin-left:-150px;
+	top:50%;
+	margin-top:-100px;
+	background:#ddd;
+	z-index:10000;
+	opacity:".75";
+	color:#222;
+}
+.loading-inner {
+	position:relative;margin:auto;margin-top:25%;font-family:Oswald, Arial;
+}
+.rowSelectOn {
+	background:#999;
+	color:#fff;
+}
+
+tr.group-level-0 td:nth-child(1) {
+    padding-left: 2px;
+    font-size: 1.15em;
+}
+.group {
+	font-weight:bold;	
+}
+
+.actionBar {padding-top:20px;padding-left:5px}
+/********************************
+ DataTables overrides 
+*********************************/
+.dataTables_wrapper {
+	flex:1;
+	display:flex;
+	flex-direction:column;
+}
+
+.dataTables_scroll {
+	flex:1;
+	display:flex;
+	flex-direction:column;
+	
+	
+}
+.dataTables_scrollBody {
+	flex:1;
+	flex-basis:auto;	
+	flex-basis:0;
+}
+
+.dataTables_filter input {
+    display: inline;
+    width: 250px;
+    margin-left: 5px;
+}
+div.dts {
+	display: flex !important;
+}
+
+.navbar {border-radius:0;margin-bottom:0;box-shadow: 0 3px 3px grey;}
+
+
+
+
+
+
+
+ 

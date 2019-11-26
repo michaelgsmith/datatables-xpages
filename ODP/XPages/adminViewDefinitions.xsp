@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	styleClass="bodyAdminViewDefinitions">
+	<xp:this.resources>
+		<xp:script src="/ssjsCCRestView.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
+	<div class="level0-flex-container">
+		<div class="level0-flex-item">
+			<xc:ccNav></xc:ccNav>
+		</div>
+		<xp:panel styleClass="actionBar" id="panelActionBar" style="">
+			 
+		<xp:button value="Create View Definition" id="button1"
+			styleClass="btn btn-warning">
+			<xp:eventHandler event="onclick" submit="false">
+
+				<xp:this.script><![CDATA[href = location.href;
+location.href = href.split(".nsf")[0] + ".nsf/adminViewDefinitionDoc.xsp";
+return false;
+parent.tabs.loadTab({
+	type: "doc",
+	xpage: "adminViewDefinitionDoc",
+	module: "admin",
+	key: "new-view-def",
+	tab:"new-view-def"
+});
+return false]]></xp:this.script>
+			</xp:eventHandler>
+		</xp:button></xp:panel>
+ 
+		<xc:ccRestView showFooter="true" showFixedHeader="true"
+			showFilter="true" showInfo="true" showCellBorders="false"
+			keyIsCategory="false" refreshInterval="0" multiValue="false"
+			showRefreshButton="true" showFilterText="true" scroller="false"
+			ordering="true" viewKey="view-definitions" thisView="ViewDefinitions"
+			dataTableClass="tableViewDefinitions"
+			rowCallback="ccRestView.defaultRowCallback" scrollerCount="0">
+		</xc:ccRestView>
+	</div>
+</xp:view>

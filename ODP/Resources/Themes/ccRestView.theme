@@ -1,0 +1,109 @@
+
+	<!--
+		The default theme contents use theme inheritance. Application themes
+		can extend an existing global theme using the extends attribute.
+		Existing themes include the following options: 1. webstandard 2. oneui
+		3. notes
+	-->
+<theme xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="platform:/plugin/com.ibm.designer.domino.stylekits/schema/stylekit.xsd">
+	<!--
+		Use this pattern to include resources (such as style sheets and
+		JavaScript files that are used by this theme.
+	
+
+	<resource rendered="#{javascript:context.getUrlParameter('theme')==''}">
+		<content-type>text/css</content-type>
+		<href>https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css</href>
+		<media>screen</media>
+	</resource>
+	<resource rendered="#{javascript:context.getUrlParameter('theme')=='journal'}">
+		<content-type>text/css</content-type>
+		<href>https://stackpath.bootstrapcdn.com/bootswatch/3.4.1/journal/bootstrap.min.css</href>
+		<media>screen</media>
+	</resource>
+	<resource rendered="#{javascript:context.getUrlParameter('theme')=='flatly'}">
+		<content-type>text/css</content-type>
+		<href>https://stackpath.bootstrapcdn.com/bootswatch/3.4.1/flatly/bootstrap.min.css</href>
+		<media>screen</media>
+	</resource>
+	<resource rendered="#{javascript:context.getUrlParameter('theme')=='slate'}">
+		<content-type>text/css</content-type>
+		<href>https://stackpath.bootstrapcdn.com/bootswatch/3.4.1/slate/bootstrap.min.css</href>
+		<media>screen</media>
+	</resource>
+	<resource rendered="#{javascript:context.getUrlParameter('theme')=='cosmo'}">
+		<content-type>text/css</content-type>
+		<href>https://stackpath.bootstrapcdn.com/bootswatch/3.4.1/cosmo/bootstrap.min.css</href>
+		<media>screen</media>
+	</resource>
+	<resource rendered="#{javascript:context.getUrlParameter('theme')=='simplex'}">
+		<content-type>text/css</content-type>
+		<href>https://stackpath.bootstrapcdn.com/bootswatch/3.4.1/simplex/bootstrap.min.css</href>
+		<media>screen</media>
+	</resource>
+-->
+	<resource>
+		<content-type>text/css</content-type>
+		<href>http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css</href>
+		<media>screen</media>
+	</resource>
+
+	<resources>
+		<styleSheet
+			href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"></styleSheet>
+	</resources>
+	<resources>
+		<styleSheet
+			href="https://cdn.datatables.net/scroller/2.0.0/css/scroller.dataTables.min.css"></styleSheet>
+	</resources>
+	<!--	
+	<resource>
+		<content-type>text/css</content-type>
+		<href>https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css</href>
+	</resource>
+	-->
+	
+	<resources>
+		<styleSheet href="ccRestView.css"></styleSheet>
+	</resources>
+	
+	<resource>
+		<content-type>application/x-javascript</content-type>
+		<href>disable_amd</href>
+	</resource>
+
+	<resource>
+		<content-type>application/x-javascript</content-type>
+		<href>http://code.jquery.com/jquery-2.2.4.min.js</href>
+	</resource>
+	<resource>
+		<content-type>application/x-javascript</content-type>
+		<href>http://code.jquery.com/ui/1.12.1/jquery-ui.min.js</href>
+	</resource>
+		<!--
+	<resource>
+		<content-type>application/x-javascript</content-type>
+		<href>https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js</href>
+	</resource>
+	-->
+	<resource>
+		<content-type>application/x-javascript</content-type>
+		<href>https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js</href>
+	</resource>
+	<resource>
+		<content-type>application/x-javascript</content-type>
+		<href>https://cdn.datatables.net/scroller/2.0.0/js/dataTables.scroller.min.js</href>
+	</resource>
+	
+	<resource>
+		<content-type>application/x-javascript</content-type>
+		<href>enable_amd</href>
+	</resource>
+
+	<resource>
+		<content-type>application/x-javascript</content-type>
+		<href>csjsCCRestView</href>
+	</resource>
+
+</theme>
