@@ -1,24 +1,201 @@
-# datatables-xpages
+﻿### A Flexible View Control
+* A re-usable custom control and companion libraries that can be dropped into ANY Domino XPage application
+* Built on jQuery and DataTables 
+* Extremely versatile and configurable
+* Born out of frustration with the out-of-the-box tools in XPages.
+* Goals: 
+    * Streamline view creation and avoid rewriting same code over and over 
+    * Move management of views out of the view design element as much as possible
+    * Separate logic and data 
+    * Minimize view creation - no more single-use views! 
 
-<p>
+### Getting Started
+1. Copy the assets into your application
+1. Load the adminConfig.xsp to define some basic information that the view control needs to work properly
+1. Create your first view definition
+1. Add the ccRestView custom control to an XPage
+1. Configure the ccRestView custom control to point to your view definition
+
+### Project Assets
+<table border="1" cellspacing="0" cellpadding="0" width="100%">
+<tbody>
+        <tr>
+            <td width="200" valign="top">
+                <p>
+                    <b>File</b>
+                </p>
+            </td>
+<td width="100" valign="top">
+                <p>
+                    <b>Type</b>
+                </p>
+            </td>
+            <td valign="top" width="600">
+                <p>
+                    <b>Description</b>
+                </p>
+            </td>
+       </tr>
+<tr>
+<td>
+ccRestView
+</td>
+<td>Custom Control</td>
+<td>
+This is the flexible view control 
+</td>
+</tr>
+<tr>
+<td>
+adminConfig.xsp
+</td>
+<td>XPage</td>
+<td>
+This XPage is used to setup some basic configuration information.  The data is stored in a Notes document. 
+</td>
+</tr>
+</tr>
+<tr>
+<td>
+adminViewDefinitionDoc.xsp
+</td>
+<td>XPage</td>
+<td>
+The XPage used to create View Definitions.  Each View Definition is stored in a Notes document. 
+</td>
+</tr>
+<tr>
+<td>
+adminViewDefinitions.xsp
+</td>
+<td>XPage</td>
+<td>
+The XPage used to display View Definitions.  <b>Note:</b>This XPage uses the Flexible View Control!. 
+</td>
+</tr>
+<tr>
+<td>
+restServices.xsp
+</td>
+<td>XPage</td>
+<td>
+Default XPage where Rest Services are located.   
+</td>
+</tr>
+<td>
+csjsCCRestView.js
+</td>
+
+<td>script</td>
+<td>
+Client side JavaScript library   
+</td>
+</tr>
+<tr>
+<td>
+ssjsCCRestView.js
+</td>
+<td>script</td>
+<td>
+Server side JavaScript library   
+</td>
+</tr>
+<tr>
+<td>
+disable_amd.js
+</td>
+<td>script</td>
+<td>
+Client side script to turn off AMD to allow scripts that use AMD (for example the DataTables source js) to load without issue.  Otherwise AMD needs to be disabled directly in the source script.  This file is utilized in the project theme.
+</td>
+</tr>
+<tr>
+<td>
+enable_amd.js
+</td>
+<td>script</td>
+<td>
+Client side script to turn off AMD back on after scripts that utilize AMD are loaded.  This file is utilized in the project theme.
+</td>
+</tr>
+<tr>
+<td>
+ccRestView.css
+</td>
+<td>stylesheet</td>
+<td>
+Client side script to turn off AMD back on after scripts that utilize AMD are loaded.  This file is utilized in the project theme.
+</td>
+</tr>
+<tr>
+<td>
+ccRestView.theme
+</td>
+<td>theme</td>
+<td>
+Defines assets (js, css, etc.) to be loaded at runtime that are contained in the project or linked to from CDN resources (jQuery, DataTables)
+</td>
+</tr>
+<tr>
+<td>
+adminViewDefinition
+</td>
+<td>form</td>
+<td>
+Underlying form associated with View Definition docs.
+</td>
+</tr>
+<tr>
+<td>
+Admin\View Definitions
+</td>
+<td>View</td>
+<td>
+Underlying view associated with View Definition docs.
+</td>
+</tr>
+<tr>
+<td>
+configDocument
+</td>
+<td>form</td>
+<td>
+Underlying form associated with the config document.
+</td>
+</tr>
+<tr>
+<td>
+vwConfig
+</td>
+<td>View</td>
+<td>
+Underlying view associated with adminConfig document.
+</td>
+</tr>
+</tbody>
+</table>
+
+### Custom Control Properties
+
+<h4>
     Required Properties
-</p>
+</h4>
 <table border="1" cellspacing="0" cellpadding="0" style="width:100%">
     <tbody>
         <tr>
             <td width="162" valign="top">
                 <p>
-                    Property
+                    <b>Property</b>
                 </p>
             </td>
             <td width="126" valign="top">
                 <p>
-                    Type
+                    <b>Type</b>
                 </p>
             </td>
             <td valign="top">
                 <p>
-                    Description
+                    <b>Description</b>
                 </p>
             </td>
         </tr>
@@ -76,25 +253,25 @@
         </tr>
     </tbody>
 </table>
-<p>
+<h4>
     Data Properties
-</p>
+</h4>
 <table border="1" cellspacing="0" cellpadding="0">
     <tbody>
         <tr>
             <td width="162" valign="top">
                 <p>
-                    Property
+                    <b>Property</b>
                 </p>
             </td>
             <td width="126" valign="top">
                 <p>
-                    Type
+                    <b>Type</b>
                 </p>
             </td>
             <td valign="top">
                 <p>
-                    Description
+                    <b>Description</b>
                 </p>
             </td>
         </tr>
@@ -219,25 +396,25 @@
         </tr>
     </tbody>
 </table>
-<p>
+<h4>
     Properties that affect the DataTable appearance
-</p>
+</h4>
 <table border="1" cellspacing="0" cellpadding="0">
     <tbody>
         <tr>
             <td width="162" valign="top">
                 <p>
-                    Property
+                    <b>Property</b>
                 </p>
             </td>
             <td width="126" valign="top">
                 <p>
-                    Type
+                    <b>Type</b>
                 </p>
             </td>
             <td valign="top">
                 <p>
-                    Description
+                    <b>Description</b>
                 </p>
             </td>
         </tr>
@@ -545,25 +722,25 @@
         </tr>
     </tbody>
 </table>
-<p>
+<h4>
     Events
-</p>
+</h4>
 <table border="1" cellspacing="0" cellpadding="0">
     <tbody>
         <tr>
             <td width="162" valign="top">
                 <p>
-                    Property
+                    <b>Property</b>
                 </p>
             </td>
             <td width="126" valign="top">
                 <p>
-                    Type
+                    <b>Type</b>
                 </p>
             </td>
             <td valign="top">
                 <p>
-                    Description
+                    <b>Description</b>
                 </p>
             </td>
         </tr>
@@ -681,3 +858,11 @@
         </tr>
     </tbody>
 </table>
+
+
+
+
+
+
+
+
