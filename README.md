@@ -1,16 +1,29 @@
-﻿### A Flexible View Control
+﻿### A Flexible View Control for XPages
 * A re-usable custom control and companion libraries that can be dropped into ANY Domino XPage application
-* Built on jQuery and DataTables 
+* Built on jQuery and DataTables, and REST data
 * Extremely versatile and configurable
 * Born out of frustration with the out-of-the-box tools in XPages.
 * Goals: 
     * Streamline view creation and avoid rewriting same code over and over 
     * Move management of views out of the view design element as much as possible
     * Separate logic and data 
-    * Minimize view creation - no more single-use views! 
+    * Minimize view creation - no more single-use views!
+<br>
+<img src="https://xpagedotme.files.wordpress.com/2019/12/datatables-xpages-domino-view.jpg" />
+<br>
+
+### How It Works - View Definitions
+* View Definitions are the 'wiring' for the Flexible View Control
+* They are stored as Lotus Notes Documents and act as the View design for the Flexible View Control
+* One View can be represented many different ways with different sorting, column orders and even categorization
+* The Lotus Notes View simply acts as a table of data served via REST services
+<br>
+<img src="https://xpagedotme.files.wordpress.com/2019/12/flexible-view-control-how-it-works-page-1.png" />
 
 ### Getting Started
-1. Copy the assets into your application
+1. Clone the project into a new On Disk Project (ODP) and import into a new .nsf in Domino Designer
+   1. Thomas Adrian has a quick and easy guide <a href="http://www.notessidan.se/blogg.nsf/xstart.xsp?post=C5E1282A37AC31EFC1257DCA00353318">here</a> on how to do it
+1. Build the project in Domino Designer
 1. Load the adminConfig.xsp to define some basic information that the view control needs to work properly
 1. Create your first view definition
 1. Add the ccRestView custom control to an XPage
