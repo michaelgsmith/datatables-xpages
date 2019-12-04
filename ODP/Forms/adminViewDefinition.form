@@ -5,86 +5,75 @@
   </code>
   <body>
     <richtext>
-      <pardef id="1"/>
-      <par def="1"/>
-      <pardef id="2" hide="notes web"/>
-      <par def="2">
-        <run>
-          <font size="12pt" style="bold" color="red"/>Form/View: 		</run>
-        <run>
-          <font size="12pt" color="red" style="bold"/>
-          <field type="text" kind="editable" name="forForm"/>
-        </run>
-        <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="10" containertype="65418" aftercontainercount="1" afterbegincount="3">
-Yg4BAIQAAAAAAAAAAAA=
-</compositedata>
-        <run>
-          <font size="12pt" style="bold" color="red"/>
-        </run>
-      </par>
-      <par def="2">
-        <run>
-          <font size="12pt" style="bold" color="red"/>Export View:	</run>
-        <run>
-          <font size="12pt" color="red" style="bold"/>
-          <field type="text" kind="editable" name="useView"/>
-        </run>
-        <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="9" containertype="65418" aftercontainercount="1" afterbegincount="3">
-Yg4BAIQAAAAAAAAAAAA=
-</compositedata>
-        <run>
-          <font size="12pt" style="bold" color="red"/>
-        </run>
-      </par>
+      <pardef id="1" hide="notes web"/>
       <par def="1">
         <run>
-          <font size="12pt" style="bold"/>Key:			</run>
+          <font size="12pt" style="bold" color="red"/>
+        </run>
+      </par>
+      <pardef id="2"/>
+      <par def="2">
         <run>
-          <font size="12pt" style="bold"/>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>key:				</run>
+        <run>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>
           <field type="text" kind="editable" name="key"/>
         </run>
-        <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="6" containertype="65418" aftercontainercount="1" afterbegincount="3">
+        <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="7" containertype="65418" aftercontainercount="1" afterbegincount="3">
 Yg4BAIQAAAAAAAAAAAA=
 </compositedata>
         <run>
-          <font size="12pt" style="bold"/>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>
         </run>
       </par>
-      <par def="1">
+      <par def="2">
         <run>
-          <font size="12pt" style="bold"/>
-        </run>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>restService:		</run>
         <run>
-          <font size="12pt" style="bold"/>
-          <field type="text" allowmultivalues="true" kind="editable" name="keyAdd" listinputseparators="comma semicolon" listdisplayseparator="semicolon"/>
-        </run>
-        <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="6" containertype="65418" aftercontainercount="1" afterbegincount="3">
-Yg4BAIQAAAAAAAAAAAA=
-</compositedata>
-        <run>
-          <font size="12pt" style="bold"/>
-        </run>
-      </par>
-      <par def="1">
-        <run>
-          <font size="12pt" style="bold"/>Key Params:	</run>
-        <run>
-          <font size="12pt" style="bold"/>
-          <field type="text" allowmultivalues="true" kind="editable" name="keyParams" listinputseparators="comma semicolon" listdisplayseparator="semicolon"/>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>
+          <field type="text" kind="editable" name="restService"/>
         </run>
         <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="6" containertype="65418" aftercontainercount="1" afterbegincount="3">
 Yg4BAIQAAAAAAAAAAAA=
 </compositedata>
         <run>
-          <font size="12pt" style="bold"/>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>
         </run>
       </par>
-      <par def="1">
+      <par def="2">
         <run>
-          <font size="12pt" style="bold"/>Key Index:		</run>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>restPage:			</run>
         <run>
-          <font size="12pt" style="bold"/>
-          <field type="number" kind="editable" name="keyIndex">
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>
+          <field type="text" kind="editable" name="restPage"/>
+        </run>
+        <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="6" containertype="65418" aftercontainercount="1" afterbegincount="3">
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata>
+        <run>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>
+        </run>
+      </par>
+      <par def="2">
+        <run>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>xagent:			</run>
+        <run>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>
+          <field type="text" allowmultivalues="true" kind="editable" name="xagent" listinputseparators="comma semicolon" listdisplayseparator="semicolon"/>
+        </run>
+        <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="6" containertype="65418" aftercontainercount="1" afterbegincount="3">
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata>
+        <run>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>
+        </run>
+      </par>
+      <par def="2">
+        <run>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>loadOnInit:		</run>
+        <run>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>
+          <field type="number" kind="editable" name="loadOnInit">
             <numberformat format="general" digits="2" punctuated="false" parens="false" percent="false" bytes="false"/>
             <code event="defaultvalue">
               <formula>0</formula>
@@ -92,82 +81,141 @@ Yg4BAIQAAAAAAAAAAAA=
           </field>
         </run>
         <run>
-          <font size="12pt" style="bold"/>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>
         </run>
       </par>
-      <par def="1">
+      <par def="2">
         <run>
-          <font size="12pt" style="bold"/>Database:		</run>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>server:			</run>
         <run>
-          <font size="12pt" style="bold"/>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>
+          <field type="text" kind="editable" name="server"/>
+        </run>
+        <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="6" containertype="65418" aftercontainercount="1" afterbegincount="3">
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata>
+        <run>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>
+        </run>
+      </par>
+      <par def="2">
+        <run>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>database:			</run>
+        <run>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>
           <field type="text" kind="editable" name="database"/>
         </run>
         <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="6" containertype="65418" aftercontainercount="1" afterbegincount="3">
 Yg4BAIQAAAAAAAAAAAA=
 </compositedata>
+        <run>
+          <font name="Courier New" pitch="fixed" truetype="true" familyid="30"/>
+        </run>
       </par>
-      <par def="1">
+      <par def="2">
         <run>
-          <font size="12pt" style="bold"/>Display View:	</run>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>displayView:		</run>
         <run>
-          <font size="12pt" style="bold"/>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>
           <field type="text" kind="editable" name="displayView"/>
         </run>
         <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="6" containertype="65418" aftercontainercount="1" afterbegincount="3">
 Yg4BAIQAAAAAAAAAAAA=
 </compositedata>
         <run>
-          <font size="12pt" style="bold"/>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>
         </run>
       </par>
-      <par def="1">
+      <par def="2">
         <run>
-          <font size="12pt" style="bold"/>Filter:			</run>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>Filter:			</run>
         <run>
-          <font size="12pt" style="bold"/>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>
           <field type="text" kind="editable" name="filter"/>
         </run>
         <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="6" containertype="65418" aftercontainercount="1" afterbegincount="3">
 Yg4BAIQAAAAAAAAAAAA=
 </compositedata>
         <run>
-          <font size="12pt" style="bold"/>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>
         </run>
       </par>
       <par def="2">
         <run>
-          <font size="12pt" style="bold" color="red"/>View Panel:		</run>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>xpage:			</run>
         <run>
-          <font size="12pt" color="red" style="bold"/>
-          <field type="text" kind="editable" name="viewPanel"/>
-        </run>
-        <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="9" containertype="65418" aftercontainercount="1" afterbegincount="3">
-Yg4BAIQAAAAAAAAAAAA=
-</compositedata>
-        <run>
-          <font size="12pt" style="bold" color="red"/>
-        </run>
-      </par>
-      <par def="1">
-        <run>
-          <font size="12pt" style="bold"/>Sort Column:	</run>
-        <run>
-          <font size="12pt" style="bold"/>
-          <field type="text" kind="editable" name="sortColumn"/>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>
+          <field type="text" kind="editable" name="xpage"/>
         </run>
         <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="6" containertype="65418" aftercontainercount="1" afterbegincount="3">
 Yg4BAIQAAAAAAAAAAAA=
 </compositedata>
         <run>
-          <font size="12pt" style="bold"/>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30" color="red"/>
         </run>
       </par>
-      <par def="1">
+      <par def="2">
         <run>
-          <font size="12pt" style="bold"/>Sort Order:		</run>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>tableClass:		</run>
         <run>
-          <font size="12pt" style="bold"/>
-          <field borderstyle="none" lookupeachchar="false" lookupaddressonrefresh="false" type="keyword" kind="editable" name="sortOrder">
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>
+          <field type="text" kind="editable" name="tableClass"/>
+        </run>
+        <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="6" containertype="65418" aftercontainercount="1" afterbegincount="3">
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata>
+        <run>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30" color="red"/>
+        </run>
+      </par>
+      <par def="2">
+        <run>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>returnColumn:		</run>
+        <run>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>
+          <field type="text" kind="editable" name="returnColumn"/>
+        </run>
+        <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="6" containertype="65418" aftercontainercount="1" afterbegincount="3">
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata>
+        <run>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30" color="red"/>
+        </run>
+      </par>
+      <par def="2">
+        <run>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>sortDefault:		</run>
+        <run>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>
+          <field type="text" kind="editable" name="sortDefault"/>
+        </run>
+        <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="6" containertype="65418" aftercontainercount="1" afterbegincount="3">
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata>
+        <run>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>
+        </run>
+      </par>
+      <par def="2">
+        <run>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>sortDefaultOrder:	</run>
+        <run>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>
+          <field type="text" kind="editable" name="sortDefaultOrder"/>
+        </run>
+        <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="6" containertype="65418" aftercontainercount="1" afterbegincount="3">
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata>
+        <run>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>
+        </run>
+      </par>
+      <par def="2">
+        <run>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>sortSecond:		</run>
+        <run>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>
+          <field borderstyle="none" lookupeachchar="false" lookupaddressonrefresh="false" type="keyword" kind="editable" name="sortDefaultSecond">
             <keywords helperbutton="false" columns="2" ui="radiobutton">
               <textlist>
                 <text>ascending</text>
@@ -180,29 +228,15 @@ Yg4BAIQAAAAAAAAAAAA=
           </field>
         </run>
         <run>
-          <font size="12pt" style="bold"/>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>
         </run>
       </par>
       <par def="2">
         <run>
-          <font size="12pt" style="bold" color="red"/>Export Sort Col:	</run>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>sortSecondOrder:	</run>
         <run>
-          <font size="12pt" color="red" style="bold"/>
-          <field type="text" kind="editable" name="sortColumnExport"/>
-        </run>
-        <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="9" containertype="65418" aftercontainercount="1" afterbegincount="3">
-Yg4BAIQAAAAAAAAAAAA=
-</compositedata>
-        <run>
-          <font size="12pt" style="bold" color="red"/>
-        </run>
-      </par>
-      <par def="2">
-        <run>
-          <font size="12pt" style="bold" color="red"/>Export Sort Ord:	</run>
-        <run>
-          <font size="12pt" color="red" style="bold"/>
-          <field borderstyle="none" lookupeachchar="false" lookupaddressonrefresh="false" type="keyword" kind="editable" name="sortOrderExport">
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>
+          <field borderstyle="none" lookupeachchar="false" lookupaddressonrefresh="false" type="keyword" kind="editable" name="sortSecondOrder">
             <keywords helperbutton="false" columns="2" ui="radiobutton">
               <textlist>
                 <text>ascending</text>
@@ -210,82 +244,71 @@ Yg4BAIQAAAAAAAAAAAA=
               </textlist>
             </keywords>
             <code event="inputtranslation">
-              <formula>@If(sortColumnExport = "" ; "";@ThisValue)</formula>
+              <formula>@If(sortColumn = "" ; "";@ThisValue)</formula>
             </code>
           </field>
         </run>
         <run>
-          <font size="12pt" style="bold" color="red"/>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>
+        </run>
+      </par>
+      <par def="2">
+        <run>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>sortServer:		</run>
+        <run>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>
+          <field borderstyle="none" lookupeachchar="false" lookupaddressonrefresh="false" type="keyword" kind="editable" name="sortServer">
+            <keywords helperbutton="false" columns="2" ui="radiobutton">
+              <textlist>
+                <text>ascending</text>
+                <text>descending</text>
+              </textlist>
+            </keywords>
+            <code event="inputtranslation">
+              <formula>@If(sortColumn = "" ; "";@ThisValue)</formula>
+            </code>
+          </field>
+        </run>
+        <run>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>
+        </run>
+      </par>
+      <par def="2">
+        <run>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>sortServerOrder:	</run>
+        <run>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>
+          <field borderstyle="none" lookupeachchar="false" lookupaddressonrefresh="false" type="keyword" kind="editable" name="sortServerOrder">
+            <keywords helperbutton="false" columns="2" ui="radiobutton">
+              <textlist>
+                <text>ascending</text>
+                <text>descending</text>
+              </textlist>
+            </keywords>
+            <code event="inputtranslation">
+              <formula>@If(sortColumn = "" ; "";@ThisValue)</formula>
+            </code>
+          </field>
+        </run>
+        <run>
+          <font size="12pt" style="bold" name="Courier New" pitch="fixed" truetype="true" familyid="30"/>
         </run>
       </par>
       <par def="1">
-        <run>
-          <font size="12pt" style="bold"/>Category Filter:	</run>
-        <run>
-          <font size="12pt" style="bold"/>
-          <field type="text" kind="editable" name="categoryFilter"/>
-        </run>
-        <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="6" containertype="65418" aftercontainercount="1" afterbegincount="3">
-Yg4BAIQAAAAAAAAAAAA=
-</compositedata>
-        <run>
-          <font size="12pt" style="bold"/>
-        </run>
-      </par>
-      <par def="1"/>
-      <par def="2">
-        <run>
-          <font style="bold" color="red"/>Memo Definition:</run>
-      </par>
-      <par def="2">
-        <run>
-          <font color="red"/>
-        </run>
-        <run>
-          <font color="red" name="monospace"/>
-          <field type="text" allowmultivalues="true" kind="editable" name="fieldDef" listinputseparators="comma semicolon newline" listdisplayseparator="newline"/>
-        </run>
-        <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="9" containertype="65418" aftercontainercount="1" afterbegincount="3">
-Yg4BAIQAAAAAAAAAAAA=
-</compositedata>
         <run>
           <font name="monospace" color="red"/>
         </run>
       </par>
       <par def="2">
-        <run>
-          <font color="red"/>
-        </run>
-      </par>
-      <par def="2">
-        <run>
-          <font style="bold" color="red"/>Export Definition:</run>
-      </par>
-      <par def="2">
-        <run>
-          <font color="red"/>
-        </run>
-        <run>
-          <font color="red" name="monospace"/>
-          <field type="text" allowmultivalues="true" kind="editable" name="fieldDefExport" listinputseparators="comma semicolon newline" listdisplayseparator="newline"/>
-        </run>
-        <compositedata type="98" prevtype="65418" nexttype="222" afterparcount="9" containertype="65418" aftercontainercount="1" afterbegincount="3">
-Yg4BAIQAAAAAAAAAAAA=
-</compositedata>
-        <run>
-          <font name="monospace" color="red"/>
-        </run>
-      </par>
-      <par def="1">
         <run>
           <font name="monospace"/>
         </run>
       </par>
-      <par def="1">
+      <par def="2">
         <run>
           <font style="bold"/>Column Definitions:</run>
       </par>
-      <par def="1">
+      <par def="2">
         <run>
           <font name="monospace"/>
           <field type="text" kind="editable" name="viewJson"/>
@@ -297,7 +320,7 @@ Yg4BAIQAAAAAAAAAAAA=
           <font name="monospace"/>
         </run>
       </par>
-      <par def="1">
+      <par def="2">
         <run>
           <font name="monospace"/>
         </run>
@@ -305,6 +328,9 @@ Yg4BAIQAAAAAAAAAAAA=
     </richtext>
   </body>
   <item name="keyIndex" summary="false">
+    <number>0</number>
+  </item>
+  <item name="loadOnInit" summary="false">
     <number>0</number>
   </item>
 </form>
