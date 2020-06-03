@@ -382,9 +382,9 @@ var ccRestView = {
 		if ($(".ffDefault",$(".panel"+o.thisView)).length > 0) {
 			// check to see if the info is in the footer.
 			// if so, set it aside and pick it up later
-			//$(".ffDefault",$(".panel"+o.thisView)).remove();
-			$(".ffDefault",$(".panel"+o.thisView)).css("max-width",$(".dataTables_scrollBody table",$(".panel"+o.thisView)).outerWidth()+"px")
-			$(".ffDefault",$(".panel"+o.thisView)).css("min-width",$(".dataTables_scrollBody table",$(".panel"+o.thisView)).outerWidth()+"px")
+			
+			// MODAL FIX $(".ffDefault",$(".panel"+o.thisView)).css("max-width",$(".dataTables_scrollBody table",$(".panel"+o.thisView)).outerWidth()+"px")
+			// MODAL FIX $(".ffDefault",$(".panel"+o.thisView)).css("min-width",$(".dataTables_scrollBody table",$(".panel"+o.thisView)).outerWidth()+"px")
 			 return;
 		}
 		var cellCount = $("th",$(".panel"+o.thisView + " " + o.dataTableClass + " thead")[0]);
@@ -412,10 +412,12 @@ var ccRestView = {
 		//console.log("attaching footer to " + footerAttachTo);
 		var footerHtml = "<div class='ffDefault " + o.ffClass + "' style='width:" + width + "'><table style='width:" + tableWidth + "px' class='fixedFooterTable cell-border'><tfoot><tr>" + tdCells.join("") + "</tr></tfoot></table></div>";
 		if (o.showFixedHeader) {
+			width="auto"; // MODAL FIX
 			var newFooter = $(".dataTables_scroll",$(".panel"+o.thisView)).after("<div class='ffDefault " + o.ffClass + "' style='width:" + width + "'><table style='width:" + tableWidth + "' class='fixedFooterTable cell-border'><tfoot><tr>" + tdCells.join("") + "</tr></tfoot></table></div>");
 			$(".ffDefault",$(".panel"+o.thisView)).prepend($(".dataTables_info",$(".panel"+o.thisView)))
 			$(".dataTables_info",$(".panel"+o.thisView)).css({"position":"absolute","padding":"5px","float":"none"})
 		} else {
+			width="auto"; // MODAL FIX
 			var newFooter = $(".panelRestView",$(".panel"+o.thisView)).append("<div class='ffDefault " + o.ffClass + "' style='width:" + width + "'><table style='width:" + tableWidth + "px' class='fixedFooterTable cell-border'><tfoot><tr>" + tdCells.join("") + "</tr></tfoot></table></div>");
 		}
 		
@@ -424,8 +426,8 @@ var ccRestView = {
 			left = $(footerAttachTo).css("position") == "relative" ? 0 : pos.left;
 		  }
 		}
-		$(".ffDefault",$(".panel"+o.thisView)).css("max-width",$(".dataTables_scrollBody table",$(".panel"+o.thisView)).outerWidth()+"px");
-		$(".ffDefault",$(".panel"+o.thisView)).css("min-width",$(".dataTables_scrollBody table",$(".panel"+o.thisView)).outerWidth()+"px");
+		// MODAL FIX $(".ffDefault",$(".panel"+o.thisView)).css("max-width",$(".dataTables_scrollBody table",$(".panel"+o.thisView)).outerWidth()+"px");
+		// MODAL FIX $(".ffDefault",$(".panel"+o.thisView)).css("min-width",$(".dataTables_scrollBody table",$(".panel"+o.thisView)).outerWidth()+"px");
 		console.log("=== end build footer for " + o.thisView + " ===")
 	},
 	loading : function(mode,viewport,thisView) {
