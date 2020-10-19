@@ -56,7 +56,13 @@ var #{compositeData.thisView} = {
 		keys : "",
 		search: ""
 	},
+	renderStart: 0,
 	renderTime: 0,
+	timeToGetDataStart: 0,
+	timeToGetData: 0,
+	timeToRenderTableStart: 0,
+	timeToRenderTable: 0,
+	timeTotal: 0,
 	dataTableClass : "",
 	thisView : "#{compositeData.thisView}",
 	cancelResize : false,
@@ -94,7 +100,9 @@ var #{compositeData.thisView} = {
 		var viewport = "#{compositeData.viewport}";
 		var ccRestViewClass = "#{compositeData.ccRestViewClass}";
 		
-		// checking for reload
+		/******************************************************
+		 CHECK TO SEE IF TABLE EXISTS AND NEEDS TO BE RELOADED	
+		******************************************************/
 		if ($(dataTableClass + " tbody tr",$(".panel"+thisView)).length > 0) {
 			ccRestView.loading("show",viewport,thisView)
 			console.log("reloading datatable")
@@ -139,10 +147,17 @@ var #{compositeData.thisView} = {
 			
 			if (options != null) {
 				var newSearchParam = ""
-				if (options.hasOwnProperty('category')) { newSearchParam="&category="+options.category }
-
+				if (options.hasOwnProperty('category')) { 
+					newSearchParam="&category="+options.category; 
+				}
+				if (options.hasOwnProperty('params')) { 
+					#{compositeData.thisView}.config.restParams = options.params;
+					restParams = options.params;
+					alert("Restparams="+restParams)
+				}
 				#{compositeData.thisView}.config.searchParam = newSearchParam;
-				url = "/" + restPath + "/" + #{compositeData.thisView}.config.restPageToUse + ".xsp/" + #{compositeData.thisView}.config.restToUse + "?x=x" + newSearchParam + "&" + restParams;
+				//url = "/" + restPath + "/" + #{compositeData.thisView}.config.restPageToUse + ".xsp/" + #{compositeData.thisView}.config.restToUse + "?x=x" + newSearchParam + "&" + restParams;
+				url = #{compositeData.thisView}.config.restUrl + "?x=x" + newSearchParam + "&" + restParams;
 				console.log("@@ url="+url)
 				$(dataTableClass,$(".panel"+thisView)).DataTable().ajax.url(url);
 			} 
@@ -173,6 +188,7 @@ var #{compositeData.thisView} = {
 		} // end of reloading data
 		
 		/********************************************************************
+		*  BUILD TABLE FOR FIRST TIME
 		*  SETUP VARS BASED ON VIEW DEFINITION
 		*  AND DYNAMICALLY PASSED CONFIG OPTIONS
 		********************************************************************/
@@ -181,6 +197,7 @@ var #{compositeData.thisView} = {
 		var viewJson = #{javascript:viewScope[compositeData.viewKey].json};
 		colsObject.viewJson = viewJson;
 		
+		// View definition information is stored in viewScope[compositeData.viewKey]
 		var viewKey = "#{compositeData.viewKey}"
 		var rest = $U.getUrlParam("key") != "" ? $U.getUrlParam("key") : viewKey; // location.href.split("=")[1];
 		var restService = "#{javascript:viewScope[compositeData.viewKey].restService}";
@@ -196,8 +213,7 @@ var #{compositeData.thisView} = {
 		var sortSecondOrder = "#{javascript:viewScope[compositeData.viewKey].sortSecondOrder}";
 		var sortServer = "#{javascript:viewScope[compositeData.viewKey].sortServer}";
 		var sortServerOrder = "#{javascript:viewScope[compositeData.viewKey].sortServerOrder}";
-		var query1 = "#{javascript:viewScope.search != null ? viewScope.search['query'] : ''}";
-		var query2 = "#{javascript:viewScope[compositeData.viewKey].query}";
+		var query = "#{javascript:viewScope[compositeData.viewKey].query}";
 		var search = "#{compositeData.search}";
 		var keys = "#{compositeData.keys}";
 		var keyIsCategory = "#{compositeData.keyIsCategory}";
@@ -250,9 +266,6 @@ var #{compositeData.thisView} = {
 		} else {
 			$(".dataTables_filter",$(".panel" +thisView)).remove();
 		}
-		
-		
-		var query = query1 != "" ? query1 : query2;
 		
 		var queryString = "#{compositeData.queryString}";
 		
@@ -317,6 +330,7 @@ var #{compositeData.thisView} = {
 		    // check for cell borders
 		    showCellBorders ? $(dataTableClass).addClass("cell-border") : "";
 		    
+		     // get rest information
 			var restToUse = restService != "" ? restService : rest;
 			if (options != null) {
 				restToUse = options.hasOwnProperty("restService") ? options.restService : restToUse;
@@ -327,7 +341,6 @@ var #{compositeData.thisView} = {
 			var restParams = [];
 			if (options != null) {
 				options.params != "" ? restParams.push("&"+options.params) : "";
-				//options.params != "" ? restParams.push("&"+options.paramsAdd) : "";
 			} 
 
 			var restUrl = "/" + restPath + "/" + restPageToUse + ".xsp/" + restToUse;
@@ -347,8 +360,18 @@ var #{compositeData.thisView} = {
 			  "ajax": {
 					"url": restUrl + "?&x=x" + searchParam + (restParams.length > 0 ? restParams[0] : "") + queryString + (scrollerCount > 0 ? "&count="+scrollerCount : ""),
 					"type": "GET",
-					"dataSrc": "",
-					"cache": false
+					"cache": false,
+					"dataSrc": function(tabledata) {
+						console.timeEnd("ccRestView : Get Data");
+						#{compositeData.thisView}.timeToGetData = Date.now() - #{compositeData.thisView}.timeToGetDataStart;
+						console.time("ccRestView : Build Table");
+						#{compositeData.thisView}.timeToRenderTableStart = Date.now();
+						return tabledata;
+					},
+					"beforeSend": function() {
+						console.time("ccRestView : Get Data");
+						#{compositeData.thisView}.timeToGetDataStart = Date.now();
+					}
 				},
 				"columns": o.columns,
 				deferRender: true,
@@ -358,7 +381,7 @@ var #{compositeData.thisView} = {
 			  	lengthChange: false,
 			    searching: showFilter,
 			    ordering: (ordering == "" || ordering == "true" ? true : false),
-			    #{javascript:compositeData.showFixedHeader==true?'scrollY:667,':''}
+			    #{javascript:compositeData.showFixedHeader==true?'scrollY:100,':''}
 			    language: {
 					search:searchLang
 			    },
@@ -592,9 +615,11 @@ var #{compositeData.thisView} = {
 	            		}
 	            	});
 	            	renderTime = Date.now() - #{compositeData.thisView}.renderStart;
-	            	console.log("renderTime="+renderTime)
+	            	console.log("renderTime="+renderTime);
 	            	#{compositeData.thisView}.renderTime = renderTime;
 		            #{compositeData.thisView}.isInitComplete = true;
+		            console.timeEnd("ccRestView : Build Table");
+		            #{compositeData.thisView}.timeToRenderTable = Date.now() - #{compositeData.thisView}.timeToRenderTableStart;
 				}, // end of initComplete
 				"rowCallback" : function(row,data,index) {
 					 #{compositeData.rowCallback}(row,data,index,params,o);
@@ -627,149 +652,19 @@ var #{compositeData.thisView} = {
 		            	$(this).attr("data-index",index);
 		            })
 		            
-		            var last=""; //null;
 		            var rowCount = 0;
 		            var trNew = null;
 		            var groupCols = ccRestView.getTotAvgCols(o);
+		            o.groupCols = groupCols;
 		            var groupTotals = ccRestView.getTotalColumns(o);
+		            o.groupTotals = groupTotals;
 		            var groupAvgs = ccRestView.getAvgColumns(o);
+		            o.groupAvgs = groupAvgs;
 		            /***************************************************************
 					 * GROUPING
 					 **************************************************************/
-					 // this code finds all the categories and inserts a row for each category
-					 // the data-category value is assigned to each row and contains the category value which 
-					 // it belongs to
-					var td = $(dataTableClass + " tbody tr:first td",$(".panel"+thisView)); //.html().split("</td>");  //$(rows).eq(0).html().split("</td>");
-					var cells = "";
-					var colspan = td.length;
-					var stopColspan = false;
-					// build the template to be used for group  rows
-					
-					if (groupCols.length > 0) {
-						colspan = 0;
-						console.log("#### " + td.length)
-						$(td).each(function() {
-							for (var x=0;x<(groupCols.length);x++) {
-								
-								if ($(this).hasClass(groupCols[x].class)) {
-									// this is a total column
-									console.log("#### "+groupCols[x].class)
-									
-										cells += '<td class="' + $(this).attr('class') + '_total"></td>';
-										stopColspan = true;
-									
-								} else {
-									// this is not a total column.  Increment colspan
-									if (x==0) {
-										if (!stopColspan) {
-											colspan++;
-										} else {
-											//cells += '<td class="' + $(this).attr('class') + '_"></td>';
-										}
-									}
-								}
-							}
-						});
-					}
-
-		            for (x=0;x<o.columnCategory.length;x++) {
-		            	rowCount = 0;
-		            	
-			            api.column(x, {page:'current'} ).data().each( function ( group, i ) {
-			            	// Loop through the group columns
-			            	// check to see if the group needs a renderer
-			            	
-			            	try {
-			            		//console.log("group="+group)
-						        var o = JSON.parse(group);
-						        if (o && typeof o === "object") {
-						        	var cat = columnRender.text(o,null,null)
-						        } else {
-						        	cat = group;
-						        }
-						        
-						    } catch (e) {
-						        // do nothing
-						        //console.warn(e.toString())
-						        cat = group
-						    }
-						    group = cat;
-			            	groupAttr = "";
-			            	if ((typeof $(rows).eq( i ).attr("data-category")) != "undefined") {
-			            		groupAttr = $(rows).eq( i ).attr("data-category") + "|" + group
-			            		$(rows).eq( i ).attr("data-category", escape(groupAttr)); // set the detail rows
-			            	} else {
-			            		groupAttr = group;
-			            		$(rows).eq( i ).attr("data-category", escape(group)); // set the detail rows
-			            	}
-			            	
-			                if ( last.toString() !== group.toString() ) {
-			                	
-			                	var tr =  $(rows).eq( i );
-			                	faClass = tr.hasClass("hidden") ? "fa-plus-circle" : "fa-minus-circle"; 
-			                	var tdFirst = '<td colspan="' + colspan + '"><i class="fa fa-minus-circle right5"></i>'+group+'</td>' + cells;
-			                	
-			                    tr.before(
-			                        '<tr data-category="' + escape(groupAttr) + '" class="group group-level-' + x + '">' + tdFirst + '</tr>'
-			                    );
-			                    trNew = tr.prev();
-			                    
-			                    last = group;
-			                    
-			                } else {
-			                	//console.log("rowCOunt=" + rowCount);
-			                	
-
-			                }
-		                	for (var t=0;t<groupTotals.length;t++) {
-		                    	// determing which cell needs the total
-		                    	var ttt = api.column(groupTotals[t].index, {page:'current'} ).data()[rowCount];
-		                    	//console.log(group + " : " + ttt);
-		                    	if (typeof $(".group[data-category='" + escape(groupAttr) + "']").attr("total") == "undefined") { 
-		                    		$(".group[data-category='" + escape(groupAttr) + "']").attr("total",ttt);
-		                    		$("."+groupTotals[t].class+"_total", $(".group[data-category='" + escape(groupAttr) + "']")).text(ccRestView.getFormattedValue(groupTotals[t].displayType, ttt));
-		                    	} else {
-		                    		$(".group[data-category='" + escape(groupAttr) + "']").attr("total",Number($(".group[data-category='" + escape(groupAttr) + "']").attr("total")) + ttt)
-		                    		$("."+groupTotals[t].class+"_total", $(".group[data-category='" + escape(groupAttr) + "']")).text(ccRestView.getFormattedValue(groupTotals[t].displayType, Number($(".group[data-category='" + escape(groupAttr) + "']").attr("total"))));
-		                    	} 
-		                    }
-		                	rowCount++;
-			            } );
-		            } // end for
-		            
-		            // Order by the grouping
-		            // add a click event to each category row that hides/shows the rows that belong to that category
-		            //console.log("grouping")
-				    $(dataTableClass + " tbody tr.group",$(".panel"+thisView)).each(function () {
-				    	$(this).click(function() {
-				    		var thisCat = $(this).attr("data-category");
-				    		var isHide = $(this).attr("data-hide");
-				    		$("[data-category*='" + $(this).attr("data-category") + "']").each(function(){
-				    			
-				    			if (!$(this).hasClass("group") || $(this).attr("data-category") != thisCat) {
-				    				if (isHide == "true") {
-				    					$(this).attr("data-hide","false");
-				    					$(this).removeClass("hidden");
-				    				} else {
-				    					$(this).attr("data-hide","true");
-				    					$(this).addClass("hidden");
-				    				}
-				    				//$(this).hasClass("hidden") ? $(this).removeClass("hidden") : $(this).addClass("hidden")
-				    			} else {
-				    				var c = $("i", this).attr("class");
-				    				if (c.indexOf("plus") > 0) {
-				    					$("i", this).removeClass("fa-plus-circle");
-				    					$("i", this).addClass("fa-minus-circle");
-				    					$(this).attr("data-hide","false");
-				    				} else {
-				    					$("i", this).addClass("fa-plus-circle");
-				    					$("i", this).removeClass("fa-minus-circle");
-				    					$(this).attr("data-hide","true");
-				    				}
-				    			}
-				    		})
-				    	})
-				    } );
+					ccRestView.groups.buildGroupRows(o,api,rows);
+					ccRestView.groups.order(o);
 				    
 			        /***************************************************************
 					* FIXED FOOTER

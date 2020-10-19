@@ -122,8 +122,33 @@ var ccRestView = {
 							return "$" + $U.formatMoney(data,2);
 							break;
 						case "renderer":
-							console.log("renderer")
-							return underwriting.renderers.quoteStatus(o,type,row,meta)
+							// parse the string
+							try {
+								var j = JSON.parse(data);
+							} catch(e) {
+								var j = data;
+							}
+			
+							if ((typeof j) == "object") {
+								// function we want to run
+								var fnstring = j.renderer;
+								
+								// find object
+								if (fnstring.indexOf('.') > -1) {
+									var fn = window.getFunctionFromString(fnstring);
+								} else {
+									var fn = window[fnstring];
+								}
+								
+								// is object a function?
+								if (typeof fn === "function")  {
+									return fn(j,type);
+								} else {
+									return "_error_";
+								}
+							} else {
+								return "_error_"
+							}
 						default:
 							if (type == "display") {	
 								return ccRestView.columnRender.text(o,meta,row);
@@ -382,9 +407,9 @@ var ccRestView = {
 		if ($(".ffDefault",$(".panel"+o.thisView)).length > 0) {
 			// check to see if the info is in the footer.
 			// if so, set it aside and pick it up later
-			//$(".ffDefault",$(".panel"+o.thisView)).remove();
-			$(".ffDefault",$(".panel"+o.thisView)).css("max-width",$(".dataTables_scrollBody table",$(".panel"+o.thisView)).outerWidth()+"px")
-			$(".ffDefault",$(".panel"+o.thisView)).css("min-width",$(".dataTables_scrollBody table",$(".panel"+o.thisView)).outerWidth()+"px")
+			
+			// MODAL FIX $(".ffDefault",$(".panel"+o.thisView)).css("max-width",$(".dataTables_scrollBody table",$(".panel"+o.thisView)).outerWidth()+"px")
+			// MODAL FIX $(".ffDefault",$(".panel"+o.thisView)).css("min-width",$(".dataTables_scrollBody table",$(".panel"+o.thisView)).outerWidth()+"px")
 			 return;
 		}
 		var cellCount = $("th",$(".panel"+o.thisView + " " + o.dataTableClass + " thead")[0]);
@@ -412,10 +437,12 @@ var ccRestView = {
 		//console.log("attaching footer to " + footerAttachTo);
 		var footerHtml = "<div class='ffDefault " + o.ffClass + "' style='width:" + width + "'><table style='width:" + tableWidth + "px' class='fixedFooterTable cell-border'><tfoot><tr>" + tdCells.join("") + "</tr></tfoot></table></div>";
 		if (o.showFixedHeader) {
+			width="auto"; // MODAL FIX
 			var newFooter = $(".dataTables_scroll",$(".panel"+o.thisView)).after("<div class='ffDefault " + o.ffClass + "' style='width:" + width + "'><table style='width:" + tableWidth + "' class='fixedFooterTable cell-border'><tfoot><tr>" + tdCells.join("") + "</tr></tfoot></table></div>");
 			$(".ffDefault",$(".panel"+o.thisView)).prepend($(".dataTables_info",$(".panel"+o.thisView)))
 			$(".dataTables_info",$(".panel"+o.thisView)).css({"position":"absolute","padding":"5px","float":"none"})
 		} else {
+			width="auto"; // MODAL FIX
 			var newFooter = $(".panelRestView",$(".panel"+o.thisView)).append("<div class='ffDefault " + o.ffClass + "' style='width:" + width + "'><table style='width:" + tableWidth + "px' class='fixedFooterTable cell-border'><tfoot><tr>" + tdCells.join("") + "</tr></tfoot></table></div>");
 		}
 		
@@ -424,8 +451,8 @@ var ccRestView = {
 			left = $(footerAttachTo).css("position") == "relative" ? 0 : pos.left;
 		  }
 		}
-		$(".ffDefault",$(".panel"+o.thisView)).css("max-width",$(".dataTables_scrollBody table",$(".panel"+o.thisView)).outerWidth()+"px");
-		$(".ffDefault",$(".panel"+o.thisView)).css("min-width",$(".dataTables_scrollBody table",$(".panel"+o.thisView)).outerWidth()+"px");
+		// MODAL FIX $(".ffDefault",$(".panel"+o.thisView)).css("max-width",$(".dataTables_scrollBody table",$(".panel"+o.thisView)).outerWidth()+"px");
+		// MODAL FIX $(".ffDefault",$(".panel"+o.thisView)).css("min-width",$(".dataTables_scrollBody table",$(".panel"+o.thisView)).outerWidth()+"px");
 		console.log("=== end build footer for " + o.thisView + " ===")
 	},
 	loading : function(mode,viewport,thisView) {
@@ -813,6 +840,154 @@ var ccRestView = {
 		sort : function() {
 			
 		} // end columnRender.sort
+	},
+	groups : {
+		buildGroupRows : function(o,api,rows) {
+			console.dir(o)
+			 // this code finds all the categories and inserts a row for each category
+			 // the data-category value is assigned to each row and contains the category value which 
+			 // it belongs to
+			var td = $(o.dataTableClass + " tbody tr:first td",$(".panel"+o.thisView)); 
+			var cells = "";
+			var colspan = td.length;
+			var stopColspan = false;
+			var last="";
+			
+			// build the template to be used for group  rows
+			
+			if (o.groupCols.length > 0) {
+				colspan = 0;
+				console.log("#### " + td.length)
+				$(td).each(function() {
+					for (var x=0;x<(o.groupCols.length);x++) {
+						
+						if ($(this).hasClass(o.groupCols[x]['class'])) {
+							// this is a total column
+							console.log("#### "+o.groupCols[x]['class'])
+							
+								cells += '<td class="' + $(this).attr('class') + '_total"></td>';
+								stopColspan = true;
+							
+						} else {
+							// this is not a total column.  Increment colspan
+							if (x==0) {
+								if (!stopColspan) {
+									colspan++;
+								} else {
+									//cells += '<td class="' + $(this).attr('class') + '_"></td>';
+								}
+							}
+						}
+					}
+				});
+			}
+
+			for (x=0;x<o.columnCategory.length;x++) {
+            	rowCount = 0;
+            	
+	            api.column(x, {page:'current'} ).data().each( function ( group, i ) {
+	            	// Loop through the group columns
+	            	// check to see if the group needs a renderer
+	            	console.log("i="+i);
+	            	try {           		
+				        var ooo = JSON.parse(group);
+				        if (ooo && typeof ooo === "object") {
+				        	// TODO
+				        	var cat = columnRender.text(ooo,null,null)
+				        } else {
+				        	cat = group;
+				        }
+				        
+				    } catch (e) {
+				        // do nothing
+				        cat = group
+				    }
+				    group = cat;
+	            	groupAttr = "";
+	            	if ((typeof $(rows).eq( i ).attr("data-category")) != "undefined") {
+	            		groupAttr = $(rows).eq( i ).attr("data-category") + "|" + group
+	            		$(rows).eq( i ).attr("data-category", escape(groupAttr)); // set the detail rows
+	            	} else {
+	            		groupAttr = group;
+	            		$(rows).eq( i ).attr("data-category", escape(group)); // set the detail rows
+	            	}
+	            	
+	                if ( last.toString() !== groupAttr.toString() ) { //==
+	                	
+	                	var tr =  $(rows).eq( i );
+	                	faClass = tr.hasClass("hidden") ? "fa-plus-circle" : "fa-minus-circle"; 
+	                	var tdFirst = '<td colspan="' + colspan + '">'+ ccRestView.getGroupIcon() + group+'</td>' + cells;
+	                	
+	                    tr.before(
+	                        '<tr data-category="' + escape(groupAttr) + '" class="group group-level-' + x + '">' + tdFirst + '</tr>'
+	                    );
+	                    trNew = tr.prev();
+	                    console.log(trNew.html());
+	                    last = groupAttr; //=
+	                    
+	                } else {
+	                	
+	                }
+                	for (var t=0;t<o.groupTotals.length;t++) {
+                    	// determing which cell needs the total
+                    	var ttt = o.api.column(o.groupTotals[t].index, {page:'current'} ).data()[rowCount];
+                    	
+                    	if (typeof $(".group[data-category='" + escape(groupAttr) + "']").attr("total") == "undefined") { 
+                    		$(".group[data-category='" + escape(groupAttr) + "']").attr("total",ttt);
+                    		$("."+o.groupTotals[t]['class']+"_total", $(".group[data-category='" + escape(groupAttr) + "']")).text(ccRestView.getFormattedValue(o.groupTotals[t].displayType, ttt));
+                    	} else {
+                    		$(".group[data-category='" + escape(groupAttr) + "']").attr("total",Number($(".group[data-category='" + escape(groupAttr) + "']").attr("total")) + ttt)
+                    		$("."+o.groupTotals[t]['class']+"_total", $(".group[data-category='" + escape(groupAttr) + "']")).text(ccRestView.getFormattedValue(o.groupTotals[t].displayType, Number($(".group[data-category='" + escape(groupAttr) + "']").attr("total"))));
+                    	} 
+                    }
+                	rowCount++;
+                	 console.log("group="+group)
+	            } );
+	           
+            } // end for
+		}, // end ccRestView.groups.buildGroupRows
+		order : function(o) {
+			// Order by the grouping
+            // add a click event to each category row that hides/shows the rows that belong to that category
+
+		    $(o.dataTableClass + " tbody tr.group",$(".panel"+o.thisView)).each(function () {
+		    	$(this).click(function() {
+		    		var thisCat = $(this).attr("data-category");
+		    		var isHide = $(this).attr("data-hide");
+		    		$("[data-category*='" + $(this).attr("data-category") + "']").each(function(){
+		    			
+		    			if (!$(this).hasClass("group") || $(this).attr("data-category") != thisCat) {
+		    				if (isHide == "true") {
+		    					$(this).attr("data-hide","false");
+		    					$(this).removeClass("hidden");
+		    				} else {
+		    					$(this).attr("data-hide","true");
+		    					$(this).addClass("hidden");
+		    				}
+		    				
+		    			} else {
+		    				var c = $(".twistie", this).attr("class");
+		    				var twistie = $('.twistie',this);
+		    				if (c.indexOf("plus") > -1) {
+		    					twistie.removeClass(twistie.attr("data-collapsed"));
+		    					twistie.addClass(twistie.attr("data-expanded"));
+		    					$(this).attr("data-hide","false");
+		    				} else {
+		    					$('.twistie',this).addClass($('.twistie',this).attr("data-collapsed"));
+		    					$('.twistie',this).removeClass($('.twistie',this).attr("data-expanded"));
+		    					$(this).attr("data-hide","true");
+		    				}
+		    			}
+		    		})
+		    	})
+		    } );
+		}
+	}, // end ccRestView.groups
+	getGroupIcon : function() {
+		//FONT AWESOME return '<i class="fa fa-minus-circle right5"></i>'
+		
+		// Bootstrap Gyphicons
+		return '<span class="twistie glyphicon glyphicon-minus-sign right5" data-expanded="glyphicon-minus-sign" data-collapsed="glyphicon-plus-sign"></span>'
 	}
 };
 var adminO = {
