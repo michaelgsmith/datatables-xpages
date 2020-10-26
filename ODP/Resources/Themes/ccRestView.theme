@@ -45,7 +45,7 @@
 -->
 	<resource>
 		<content-type>text/css</content-type>
-		<href>http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css</href>
+		<href>https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css</href>
 		<media>screen</media>
 	</resource>
 
@@ -75,11 +75,11 @@
 
 	<resource>
 		<content-type>application/x-javascript</content-type>
-		<href>http://code.jquery.com/jquery-2.2.4.min.js</href>
+		<href>https://code.jquery.com/jquery-2.2.4.min.js</href>
 	</resource>
 	<resource>
 		<content-type>application/x-javascript</content-type>
-		<href>http://code.jquery.com/ui/1.12.1/jquery-ui.min.js</href>
+		<href>https://code.jquery.com/ui/1.12.1/jquery-ui.min.js</href>
 	</resource>
 		<!--
 	<resource>

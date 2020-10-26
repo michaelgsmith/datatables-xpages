@@ -883,12 +883,12 @@ var ccRestView = {
 			}
 
 			for (x=0;x<o.columnCategory.length;x++) {
-            	rowCount = 0;
-            	
+           	rowCount = 0;
+           	
 	            api.column(x, {page:'current'} ).data().each( function ( group, i ) {
 	            	// Loop through the group columns
 	            	// check to see if the group needs a renderer
-	            	console.log("i="+i);
+	
 	            	try {           		
 				        var ooo = JSON.parse(group);
 				        if (ooo && typeof ooo === "object") {
@@ -905,12 +905,16 @@ var ccRestView = {
 				    group = cat;
 	            	groupAttr = "";
 	            	if ((typeof $(rows).eq( i ).attr("data-category")) != "undefined") {
-	            		groupAttr = $(rows).eq( i ).attr("data-category") + "|" + group
+	            		// sub cat
+	            		groupAttr = $(rows).eq( i ).attr("data-category") + group + "*"
 	            		$(rows).eq( i ).attr("data-category", escape(groupAttr)); // set the detail rows
+	            		$(rows).eq( i ).attr("data-category-level", x); // set the detail rows
 	            	} else {
+	            		// cat
 	            		groupAttr = group;
-	            		$(rows).eq( i ).attr("data-category", escape(group)); // set the detail rows
+	            		$(rows).eq( i ).attr("data-category", escape(group) + "*"); // set the detail rows
 	            	}
+	            	
 	            	
 	                if ( last.toString() !== groupAttr.toString() ) { //==
 	                	
@@ -922,29 +926,29 @@ var ccRestView = {
 	                        '<tr data-category="' + escape(groupAttr) + '" class="group group-level-' + x + '">' + tdFirst + '</tr>'
 	                    );
 	                    trNew = tr.prev();
-	                    console.log(trNew.html());
+	              
 	                    last = groupAttr; //=
 	                    
 	                } else {
 	                	
 	                }
-                	for (var t=0;t<o.groupTotals.length;t++) {
-                    	// determing which cell needs the total
-                    	var ttt = o.api.column(o.groupTotals[t].index, {page:'current'} ).data()[rowCount];
-                    	
-                    	if (typeof $(".group[data-category='" + escape(groupAttr) + "']").attr("total") == "undefined") { 
-                    		$(".group[data-category='" + escape(groupAttr) + "']").attr("total",ttt);
-                    		$("."+o.groupTotals[t]['class']+"_total", $(".group[data-category='" + escape(groupAttr) + "']")).text(ccRestView.getFormattedValue(o.groupTotals[t].displayType, ttt));
-                    	} else {
-                    		$(".group[data-category='" + escape(groupAttr) + "']").attr("total",Number($(".group[data-category='" + escape(groupAttr) + "']").attr("total")) + ttt)
-                    		$("."+o.groupTotals[t]['class']+"_total", $(".group[data-category='" + escape(groupAttr) + "']")).text(ccRestView.getFormattedValue(o.groupTotals[t].displayType, Number($(".group[data-category='" + escape(groupAttr) + "']").attr("total"))));
-                    	} 
-                    }
-                	rowCount++;
-                	 console.log("group="+group)
+               	for (var t=0;t<o.groupTotals.length;t++) {
+                   	// determing which cell needs the total
+                   	var ttt = o.api.column(o.groupTotals[t].index, {page:'current'} ).data()[rowCount];
+                   	
+                   	if (typeof $(".group[data-category='" + escape(groupAttr) + "']").attr("total") == "undefined") { 
+                   		$(".group[data-category='" + escape(groupAttr) + "']").attr("total",ttt);
+                   		$("."+o.groupTotals[t]['class']+"_total", $(".group[data-category='" + escape(groupAttr) + "']")).text(ccRestView.getFormattedValue(o.groupTotals[t].displayType, ttt));
+                   	} else {
+                   		$(".group[data-category='" + escape(groupAttr) + "']").attr("total",Number($(".group[data-category='" + escape(groupAttr) + "']").attr("total")) + ttt)
+                   		$("."+o.groupTotals[t]['class']+"_total", $(".group[data-category='" + escape(groupAttr) + "']")).text(ccRestView.getFormattedValue(o.groupTotals[t].displayType, Number($(".group[data-category='" + escape(groupAttr) + "']").attr("total"))));
+                   	} 
+                   }
+               	rowCount++;
+               
 	            } );
 	           
-            } // end for
+           } // end for
 		}, // end ccRestView.groups.buildGroupRows
 		order : function(o) {
 			// Order by the grouping
@@ -953,30 +957,66 @@ var ccRestView = {
 		    $(o.dataTableClass + " tbody tr.group",$(".panel"+o.thisView)).each(function () {
 		    	$(this).click(function() {
 		    		var thisCat = $(this).attr("data-category");
-		    		var isHide = $(this).attr("data-hide");
-		    		$("[data-category*='" + $(this).attr("data-category") + "']").each(function(){
+		    		var isHide = $(this).attr("data-hide") == 'true' ? true : false;
+		    		var isExpand = $(".twistie", this).attr("class").indexOf('minus') > -1 ? false : true;
+		    		
+		    		var lastCat = thisCat;
+		    		var lastExpanded = false;
+		    		var isCat = false;
+		    		
+		    		$("[data-category*='" + thisCat + "']").each(function(){
 		    			
 		    			if (!$(this).hasClass("group") || $(this).attr("data-category") != thisCat) {
-		    				if (isHide == "true") {
-		    					$(this).attr("data-hide","false");
-		    					$(this).removeClass("hidden");
+		    				// data rows and subcategories to the category that was clicked
+		    				
+		    				if ($(this).hasClass("group")) {
+		    					lastCat = $(this).attr('data-category');
+		    					lastExpanded = !isHide;
+		    					isCat = true;
 		    				} else {
+		    					isCat = false;
+		    				}
+		    		
+		    				if (isHide) {
+		    					// if the top category clicked is isHide then all children need to be hidden
 		    					$(this).attr("data-hide","true");
 		    					$(this).addClass("hidden");
+		    				} else {
+		    					if (lastExpanded && !isCat) {
+		    						// category of this data row
+		    						$(this).attr("data-hide","false");
+		    						$(this).removeClass("hidden");
+			    					
+		    					} else if (lastExpanded && isCat) {
+		    						// subcategory
+		    						$(this).removeClass("hidden");
+		    					} else {
+		    						$(this).attr("data-hide","true");
+			    					$(this).addClass("hidden");
+		    					}
 		    				}
-		    				
+		    				if (isCat) {
+		    					// if this is a subcategory reset the lastExpanded variable for 
+		    					// the data rows
+		    					lastExpanded = $('.twistie', $(this)).attr('class').indexOf('minus') > -1;
+		    				}
 		    			} else {
+		    				// category row that was clicked
+		    				lastCat = $(this).attr("data-category");
+		    				
 		    				var c = $(".twistie", this).attr("class");
 		    				var twistie = $('.twistie',this);
 		    				if (c.indexOf("plus") > -1) {
 		    					twistie.removeClass(twistie.attr("data-collapsed"));
 		    					twistie.addClass(twistie.attr("data-expanded"));
 		    					$(this).attr("data-hide","false");
+		    					lastExpanded = true;
 		    				} else {
 		    					$('.twistie',this).addClass($('.twistie',this).attr("data-collapsed"));
 		    					$('.twistie',this).removeClass($('.twistie',this).attr("data-expanded"));
 		    					$(this).attr("data-hide","true");
 		    				}
+		    				isHide = !isHide;
 		    			}
 		    		})
 		    	})
@@ -1116,4 +1156,17 @@ function checkZero(val) {
 		return "0"+val;
 	}
 	return val;
+}
+//Get function from string, with or without scopes (by Nicolas Gauthier)
+window.getFunctionFromString = function(string)
+{
+    var scope = window;
+    var scopeSplit = string.split('.');
+    for (i = 0; i < scopeSplit.length - 1; i++)
+    {
+        scope = scope[scopeSplit[i]];
+
+        if (scope == undefined) return;
+    }
+    return scope[scopeSplit[scopeSplit.length - 1]];
 }

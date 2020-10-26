@@ -11,7 +11,7 @@
   </item>
   <item name="$CSSFiles">
     <textlist>
-      <text>http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css</text>
+      <text>https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css</text>
     </textlist>
   </item>
 </note>
