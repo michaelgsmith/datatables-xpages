@@ -45,7 +45,7 @@ return false;
 	</xp:inputText>
 	<xp:scriptBlock>
 
-		<xp:this.value><![CDATA[var loadOnInit = "#{javascript:viewScope[compositeData.viewKey].loadOnInit}";
+		<xp:this.value><![CDATA[		var loadOnInit = "#{javascript:viewScope[compositeData.viewKey].loadOnInit}";
 var loadOnInitOverride = "#{compositeData.loadOnInit}";
 loadOnInit = loadOnInitOverride != "" ? loadOnInitOverride : loadOnInit;
 
@@ -56,13 +56,15 @@ var #{compositeData.thisView} = {
 		keys : "",
 		search: ""
 	},
-	renderStart: 0,
-	renderTime: 0,
-	timeToGetDataStart: 0,
-	timeToGetData: 0,
-	timeToRenderTableStart: 0,
-	timeToRenderTable: 0,
-	timeTotal: 0,
+	stats : {
+		renderStart: 0,
+		renderTime: 0,
+		timeToGetDataStart: 0,
+		timeToGetData: 0,
+		timeToRenderTableStart: 0,
+		timeToRenderTable: 0,
+		timeTotal: 0,
+	},
 	dataTableClass : "",
 	thisView : "#{compositeData.thisView}",
 	cancelResize : false,
@@ -81,7 +83,7 @@ var #{compositeData.thisView} = {
 		}
 	}, 
 	build : function () {
-		#{compositeData.thisView}.renderStart = Date.now();
+		this.stats.renderStart = Date.now();
 		var options = arguments[0];  
 		var cancelResize = false;
 		console.log("--- start build() ---");
@@ -207,12 +209,15 @@ var #{compositeData.thisView} = {
 		var xpage = "#{javascript:viewScope[compositeData.viewKey].xpage}";
 		
 		var ordering = "#{compositeData.ordering}";
+		/*
 		var sortDefault = "#{javascript:viewScope[compositeData.viewKey].sortDefault}";
 		var sortDefaultOrder = "#{javascript:viewScope[compositeData.viewKey].sortDefaultOrder}";
 		var sortSecond = "#{javascript:viewScope[compositeData.viewKey].sortSecond}";
 		var sortSecondOrder = "#{javascript:viewScope[compositeData.viewKey].sortSecondOrder}";
 		var sortServer = "#{javascript:viewScope[compositeData.viewKey].sortServer}";
 		var sortServerOrder = "#{javascript:viewScope[compositeData.viewKey].sortServerOrder}";
+		*/
+		var sortArray = #{viewScope[compositeData.viewKey].sortArray};
 		var query = "#{javascript:viewScope[compositeData.viewKey].query}";
 		var search = "#{compositeData.search}";
 		var keys = "#{compositeData.keys}";
@@ -291,10 +296,13 @@ var #{compositeData.thisView} = {
 		}
 
 		// sorting is defined in ccRestView.buildView() with these values
+		/*
 		colsObject.sortDefault = sortDefault;
 		colsObject.sortDefaultOrder = sortDefaultOrder == "d" ? "desc" : "asc";
 		colsObject.sortSecond = sortSecond;
 		colsObject.sortSecondOrder = sortSecondOrder == "d" ? "desc" : "asc";
+		*/
+		colsObject.sortArray = sortArray;
 		colsObject.retColumn = retColumn;
 		colsObject.multiValue = multiValue;
 		
@@ -363,14 +371,14 @@ var #{compositeData.thisView} = {
 					"cache": false,
 					"dataSrc": function(tabledata) {
 						console.timeEnd("ccRestView : Get Data");
-						#{compositeData.thisView}.timeToGetData = Date.now() - #{compositeData.thisView}.timeToGetDataStart;
+						#{compositeData.thisView}.stats.timeToGetData = Date.now() - #{compositeData.thisView}.stats.timeToGetDataStart;
 						console.time("ccRestView : Build Table");
-						#{compositeData.thisView}.timeToRenderTableStart = Date.now();
+						#{compositeData.thisView}.stats.timeToRenderTableStart = Date.now();
 						return tabledata;
 					},
 					"beforeSend": function() {
 						console.time("ccRestView : Get Data");
-						#{compositeData.thisView}.timeToGetDataStart = Date.now();
+						#{compositeData.thisView}.stats.timeToGetDataStart = Date.now();
 					}
 				},
 				"columns": o.columns,
@@ -389,14 +397,14 @@ var #{compositeData.thisView} = {
 			    order: o.sortColumn,
 			    "initComplete": function() {
 					console.log("*** initComplete ***");
-													            
+					var _thisView = window.getFunctionFromString(thisView);						            
 					var itemNames = [];
 					var itemIndexes = [];
 					
-					for (y=0;y<#{compositeData.thisView}.viewConfig.columnsHead.length;y++) {
+					for (y=0;y<_thisView.viewConfig.columnsHead.length;y++) {
 					
-						if (#{compositeData.thisView}.viewConfig.columnsHead[y].category != "true" && #{compositeData.thisView}.viewConfig.columnsHead[y].hidden != "true") {
-							itemNames.push(#{compositeData.thisView}.viewConfig.columnsHead[y].itemName);
+						if (_thisView.viewConfig.columnsHead[y].category != "true" && _thisView.viewConfig.columnsHead[y].hidden != "true") {
+							itemNames.push(_thisView.viewConfig.columnsHead[y].itemName);
 							itemIndexes.push(y);
 						}
 					}
@@ -415,7 +423,7 @@ var #{compositeData.thisView} = {
 						ffObject.showFixedHeader = showFixedHeader;
 						ffObject.ffClass = ffClass;
 						ffObject.dataTableClass = dataTableClass;
-						#{compositeData.thisView}.ffObject = ffObject;
+						_thisView.ffObject = ffObject;
 						ccRestView.buildFooter(ffObject);
 						
 						// custom fixed footer code
@@ -482,9 +490,7 @@ var #{compositeData.thisView} = {
 				        }
 					 
 			        } else { infoHeight = 0;}
-			        console.log("pager="+$(".dataTables_paginate",$(".panel"+thisView)).outerHeight());
-			        console.log("filter="+$(".dataTables_filter",$(".panel"+thisView)).outerHeight());
-			        console.log("info="+$(".dataTables_info",$(".panel"+thisView)).outerHeight());
+			     
 			        
 			        fixedHeader.filterHeight =  Math.max(filterHeight, pagerHeight, infoHeight);  //showPaging ? $(".dataTables_paginate",$(".panel"+thisView)).outerHeight() : $(".dataTables_filter",$(".panel"+thisView)).outerHeight();  // getting this value to be passed to the fixed header calculator
 			        
@@ -494,25 +500,24 @@ var #{compositeData.thisView} = {
 					 **************************************************************/
 			        var api = this.api(), data;
 			        // get any totals
-			        ccRestView.getTotals(#{compositeData.thisView}.viewConfig,api,ffClass);
+			        console.log("### INITCOMPLETE GETTOTALS")
+			        ccRestView.getTotals(_thisView.viewConfig,api,ffClass);
+
 			        // get any avg
-			        ccRestView.getAvg(#{compositeData.thisView}.viewConfig,api,ffClass);
-			        
+			        ccRestView.getAvg(_thisView.viewConfig,api,ffClass);
+			        /*
 			        // update the window scroll even so the footer stays in place
 			         $( window ).scroll(function() {
 			            $(".fixedFooterNew",$(".panel"+thisView)).css("position","fixed");
 			            $(".fixedFooterNew",$(".panel"+thisView)).css("bottom","0");
 			            $(".fixedFooterNew",$(".panel"+thisView)).css("top","");
 		            });
-		            
+		            */
 		            /***************************************************************
 					 * FIXED HEADER
 					 **************************************************************/
 					if (showFixedHeader) {
 						$(".dataTables_scrollHead",$(".panel"+thisView)).addClass(fhClass);
-						// set the marginTop of the table
-				//		$(".dataTables_scrollHeadInner",$(".panel"+thisView)).css("width",$(".dataTables_scrollBody",$(".panel"+thisView)).outerWidth()+"px");
-				//		$(".dataTables_scrollHeadInner table",$(".panel"+thisView)).css("width",$(".dataTables_scrollBody table",$(".panel"+thisView)).outerWidth()+"px");
 					} 
 					
 					/***************************************************************
@@ -528,7 +533,7 @@ var #{compositeData.thisView} = {
 		        		setInterval(function(){
 		        			var loop = true;
 		        			var skip = false;
-		        			var thisElement = $(".panel" + "#{compositeData.thisView}");
+		        			var thisElement = $(".panel" + "_thisView");
 		        			
 		        			while (loop) {
 		        				var parent = thisElement.parent();
@@ -543,7 +548,7 @@ var #{compositeData.thisView} = {
 		        				}
 		        			}
 		        			if (!skip) {
-		        				#{compositeData.thisView}.build(); 
+		        				_thisView.build(); 
 		        			} else {
 
 		        			}
@@ -562,7 +567,7 @@ var #{compositeData.thisView} = {
 
 						var ajaxOptions = {
 							type: 'GET',
-						    url: "/" + restPath + "/" + #{compositeData.thisView}.config.restPageToUse + ".xsp/" + #{compositeData.thisView}.config.restToUse + "?x=x" + #{compositeData.thisView}.config.searchParam + "&" + #{compositeData.thisView}.config.restParams[x] + "&start="+scrollerCount+"&count="+scrollerCount,
+						    url: "/" + restPath + "/" + _thisView.config.restPageToUse + ".xsp/" + _thisView.config.restToUse + "?x=x" + _thisView.config.searchParam + "&" + _thisView.config.restParams[x] + "&start="+scrollerCount+"&count="+scrollerCount,
 						    contentType: 'application/json',
 						    dataType: 'json',
 						    cache: false
@@ -578,7 +583,7 @@ var #{compositeData.thisView} = {
 									
 								} else {
 									scrollerInc += scrollerCount;
-									ajaxOptions.url = "/" + restPath + "/" + #{compositeData.thisView}.config.restPageToUse + ".xsp/" + #{compositeData.thisView}.config.restToUse + "?x=x" + #{compositeData.thisView}.config.searchParam + "&" + #{compositeData.thisView}.config.restParams[x] + "&start=" + scrollerInc + "&count=" + scrollerCount
+									ajaxOptions.url = "/" + restPath + "/" + _thisView.config.restPageToUse + ".xsp/" + _thisView.config.restToUse + "?x=x" + _thisView.config.searchParam + "&" + _thisView.config.restParams[x] + "&start=" + scrollerInc + "&count=" + scrollerCount
 									getScrollerData();
 								}
 								
@@ -614,12 +619,20 @@ var #{compositeData.thisView} = {
 	            			console.warn("shift off")
 	            		}
 	            	});
-	            	renderTime = Date.now() - #{compositeData.thisView}.renderStart;
-	            	console.log("renderTime="+renderTime);
-	            	#{compositeData.thisView}.renderTime = renderTime;
-		            #{compositeData.thisView}.isInitComplete = true;
+	            	
+	            	/*************************************************
+					 FOOTER CALLBACK
+					**************************************************/
+					if ("#{compositeData.footerCallback}" != "") {
+						#{compositeData.footerCallback}(this.thisView);
+					}
+	            	
+	            	renderTime = Date.now() - _thisView.stats.renderStart;
+
+	            	_thisView.stats.renderTime = renderTime;
+		            _thisView.isInitComplete = true;
 		            console.timeEnd("ccRestView : Build Table");
-		            #{compositeData.thisView}.timeToRenderTable = Date.now() - #{compositeData.thisView}.timeToRenderTableStart;
+		            _thisView.stats.timeToRenderTable = Date.now() - _thisView.stats.timeToRenderTableStart;
 				}, // end of initComplete
 				"rowCallback" : function(row,data,index) {
 					 #{compositeData.rowCallback}(row,data,index,params,o);
@@ -628,6 +641,9 @@ var #{compositeData.thisView} = {
 					
 					$(row).addClass( data["@unid"] );
 					#{compositeData.createdRow}(row,data,index,params,o);
+				},
+				"footerCallback" : function(row, data, start, end, display) {
+					//#{compositeData.footerCallback}(row, data, start, end, display,o);
 				},
 				"preDrawCallback" : function() {
 					console.log("pre drawcallback")
@@ -681,14 +697,13 @@ var #{compositeData.thisView} = {
 					 * TOTAL and AVG
 					 **************************************************************/
 		            // Update the totals
-		            
-		            if (ffClass != "") {
-			            if ($("." + ffClass).length > 0) {
-				            ccRestView.getTotals(#{compositeData.thisView}.viewConfig,api,ffClass);
-				            // Update the Avgs
-				            ccRestView.getAvg(#{compositeData.thisView}.viewConfig,api,ffClass);
-			            }
-		            }
+		            console.log("## DRAWCLLBACK GETTOTALS = " + $(".ffDefault").length)
+		          //  if ($(".ffDefault").length > 0) {
+			            ccRestView.getTotals(#{compositeData.thisView}.viewConfig,api,ffClass);
+			            // Update the Avgs
+			            ccRestView.getAvg(#{compositeData.thisView}.viewConfig,api,ffClass);
+		          //  }
+
 		            
 		           /***************************************************************
 					 * CUSTOM DRAW CALLBACK
@@ -725,10 +740,21 @@ var #{compositeData.thisView} = {
 							$(".updateCell").removeClass("updateCell");
 						},5000);
 					}
+					
+					/*************************************************
+					 FOOTER CALLBACK
+					**************************************************/
+					#{compositeData.footerCallback}(this.thisView);
 					console.log("end drawCallback")
 					
 				} // end drawCallback
 			}); // end DataTable()
+			
+			$(dataTableClass).on( 'order.dt', function () {
+			    // This will show: "Ordering on column 1 (asc)", for example
+			    var order = vTable.order();
+			    #{compositeData.thisView}.viewConfig.currentSort = order;
+			} );
 			
 			$(dataTableClass).on( 'column-sizing.dt', function ( e, settings ) {
 				// console.log( '*** column resizing ***' );
@@ -784,8 +810,13 @@ var #{compositeData.thisView} = {
 	}, // end build
 	draw : function() {
 		$(this.dataTableClass,$(".panel"+this.thisView)).DataTable().draw();
+	},
+	collapseAll : function() {
+		ccRestView.groups.collapseAll(this.thisView);
+	},
+	expandAll : function() {
+		ccRestView.groups.expandAll(this.thisView);
 	}
-	
 
 }
  /***************************************************************
@@ -796,11 +827,5 @@ $.fn.dataTable.ext.errMode = 'none';
 loadOnInit == "true" ? #{compositeData.thisView}.build() : ""]]></xp:this.value>
 
 	</xp:scriptBlock>
-	<xp:text escape="true" id="style" tagName="style">
-		<xp:this.value><![CDATA[#{javascript:if (compositeData.ccRestViewClass != null) {
-	var showFH = compositeData.showFixedHeader;
-	showFH ? "." + compositeData.ccRestViewClass + " {position:absolute;height:100%;width:100%}" : ".ccRestView {position:relative;}"
-}
-}]]></xp:this.value>
-	</xp:text>
+	
 </xp:view>
