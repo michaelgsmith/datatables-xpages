@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
-
+	<xp:this.resources>
+		<xp:script src="/ssjsCCRestView.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
 	<xp:this.data>
 		<xp:dominoDocument var="configDoc" formName="configDocument">
 			<xp:this.action><![CDATA[#{javascript:viewScope.configDocid == null ? "createDocument" : "editDocument"}]]></xp:this.action>
@@ -10,10 +12,14 @@
 	<xp:this.beforePageLoad><![CDATA[#{javascript:// try to find a config doc
 var docid = @DbLookup(@DbName(),"vwConfig","config",1,"[RETURNDOCUMENTUNIQUEID]");
 viewScope.configDocid=docid;
-print("docid="+docid)}]]></xp:this.beforePageLoad>
+
+var viewdef = @DbLookup(@DbName(),"vwAdminViewDefinitions","view-definitions",1,"[RETURNDOCUMENTUNIQUEID]");
+
+viewScope.viewDefCreated = (typeof viewdef) == "undefined" ? false : true;
+}]]></xp:this.beforePageLoad>
 	<div class="level0-flex-container">
 		<div class="level0-flex-item">
- 
+
 			<xc:ccNav></xc:ccNav>
 		</div>
 		<div class="level0-flex-item">
@@ -40,7 +46,7 @@ print("docid="+docid)}]]></xp:this.beforePageLoad>
 					</xp:td>
 					<xp:td>
 						<xp:inputTextarea id="inputTextarea2"
-							multipleSeparator="#{javascript:@NewLine()}" rows="10"
+							multipleSeparator="#{javascript:@NewLine()}" rows="8"
 							value="#{configDoc.servers}" style="width:100%" styleClass="form-control">
 							<xp:this.attrs>
 								<xp:attr name="placeholder" value="Enter one value per line">
@@ -55,10 +61,11 @@ print("docid="+docid)}]]></xp:this.beforePageLoad>
 					</xp:td>
 					<xp:td>
 						<xp:inputTextarea id="inputTextarea1"
-							multipleSeparator="#{javascript:@NewLine()}" rows="10"
+							multipleSeparator="#{javascript:@NewLine()}" rows="8"
 							value="#{configDoc.databases}" style="width:100%" styleClass="form-control">
 							<xp:this.attrs>
-								<xp:attr name="placeholder" value="Enter one value per line in the format 'description~path/mydb.nsf'">
+								<xp:attr name="placeholder"
+									value="Enter one value per line in the format 'description~path/mydb.nsf'">
 								</xp:attr>
 							</xp:this.attrs>
 						</xp:inputTextarea>
@@ -66,29 +73,47 @@ print("docid="+docid)}]]></xp:this.beforePageLoad>
 				</xp:tr>
 				<tr>
 					<td colspan="2">
-						<xp:button id="button1" value="Save" styleClass="btn btn-primary">
-							<xp:eventHandler event="onclick" submit="true"
-								refreshMode="partial" refreshId="tableConfig">
-								<xp:this.action><![CDATA[#{javascript:configDoc.save()}]]></xp:this.action>
-							</xp:eventHandler>
-						</xp:button>
-						<xp:button value="Create View Definition" id="button2"
-							styleClass="btn btn-warning" style="margin-left:10px">
-							<xp:eventHandler event="onclick" submit="false">
+						<div>
+							<xp:button id="button1"
+								value="Step1. Save Configuration" styleClass="btn btn-primary"
+								style="width:225px;text-align:left">
+								<xp:eventHandler event="onclick"
+									submit="true" refreshMode="partial" refreshId="tableConfig">
+									<xp:this.action><![CDATA[#{javascript:admin.config.save()}]]></xp:this.action>
+								</xp:eventHandler>
+							</xp:button>
+							<xp:text escape="true"
+								id="computedField1"  style="margin-left:10px;font-weight:bold">
+							<xp:this.value><![CDATA[#{javascript:viewScope.configDocid != null ? "Complete" : ""}]]></xp:this.value></xp:text>
+						</div>
+						<div style="margin-top:10px">
+							<xp:button
+								value="Step 2. Create view-definitions" id="button3"
+								styleClass="btn btn-primary"
+								style="width:225px;text-align:left">
 
-								<xp:this.script><![CDATA[href = location.href;
+								<xp:eventHandler event="onclick"
+									submit="true" refreshMode="partial" refreshId="tableConfig">
+									<xp:this.action><![CDATA[#{javascript:admin.createDefaultViewDef();}]]></xp:this.action>
+								</xp:eventHandler>
+
+							</xp:button>
+							<xp:text escape="true"
+								id="computedField2" style="margin-left:10px;font-weight:bold">
+							<xp:this.value><![CDATA[#{javascript:viewScope.viewDefCreated ? "Complete" : ""}]]></xp:this.value></xp:text>
+						</div>
+						<div style="margin-top:10px">
+							<xp:button value="Create New View Definition" id="button2"
+								styleClass="btn btn-warning" style="">
+								<xp:eventHandler event="onclick" submit="false">
+
+									<xp:this.script><![CDATA[href = location.href;
 location.href = href.split(".nsf")[0] + ".nsf/adminViewDefinitionDoc.xsp";
 return false;
-parent.tabs.loadTab({
-	type: "doc",
-	xpage: "adminViewDefinitionDoc",
-	module: "admin",
-	key: "new-view-def",
-	tab:"new-view-def"
-});
-return false]]></xp:this.script>
-							</xp:eventHandler>
-						</xp:button>
+]]></xp:this.script>
+								</xp:eventHandler>
+							</xp:button>
+						</div>
 					</td>
 
 				</tr>

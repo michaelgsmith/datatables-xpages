@@ -29,13 +29,14 @@ return false]]></xp:this.script>
 			</xp:eventHandler>
 		</xp:button></xp:panel>
  
-		<xc:ccRestView showFooter="true" showFixedHeader="true"
-			showFilter="true" showInfo="true" showCellBorders="false"
-			keyIsCategory="false" refreshInterval="0" multiValue="false"
-			showRefreshButton="true" showFilterText="true" scroller="false"
-			ordering="true" viewKey="view-definitions" thisView="ViewDefinitions"
-			dataTableClass="tableViewDefinitions"
-			rowCallback="ccRestView.defaultRowCallback" scrollerCount="0">
+		<xc:ccRestView id="ccRestView" showFooter="true"
+			showFixedHeader="true" showFilter="true" showInfo="true"
+			showCellBorders="false" keyIsCategory="false" refreshInterval="0"
+			multiValue="false" showRefreshButton="true" showFilterText="true"
+			scroller="false" ordering="true" viewKey="view-definitions"
+			thisView="ViewDefinitions" dataTableClass="tableViewDefinitions"
+			rowCallback="ccRestView.defaultRowCallback" scrollerCount="0"
+			ccRestViewClass="panelRestViewContainer">
 		</xc:ccRestView>
 	</div>
 </xp:view>

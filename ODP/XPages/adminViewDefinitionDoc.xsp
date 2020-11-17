@@ -1,26 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
-	style="background:#f3f3f4;"
-	xmlns:xc="http://www.ibm.com/xsp/custom">
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" style="background:#f3f3f4;"
+	xmlns:xc="http://www.ibm.com/xsp/custom" styleClass="adminViewDefinitionDoc">
 	<xp:this.resources>
 		<xp:script src="/ssjsCCRestView.jss" clientSide="false"></xp:script>
 	</xp:this.resources>
 	<xp:this.data>
-		<xp:dominoDocument var="docViewDef"
-			formName="adminViewDefinition">
- 
+		<xp:dominoDocument var="docViewDef" formName="adminViewDefinition">
+
 		</xp:dominoDocument>
 	</xp:this.data>
 	<xp:this.beforePageLoad><![CDATA[#{javascript:admin.viewdef.beforePageLoad()}]]></xp:this.beforePageLoad>
 
 	<xc:ccNav></xc:ccNav>
 	<div class="actionBar">
-		
-		<xp:button value="Save" id="button2"
-			styleClass="btn btn-primary btn-sm">
+
+		<xp:button value="Save" id="button2" styleClass="btn btn-primary btn-sm">
 			<xp:eventHandler event="onclick" submit="true"
-				refreshMode="partial" refreshId="panelFormViewDef"
-				id="eventHandler4">
+				refreshMode="partial" refreshId="panelFormViewDef" id="eventHandler4">
 				<xp:this.action><![CDATA[#{javascript:admin.viewdef.save()}]]></xp:this.action>
 				<xp:this.onComplete><![CDATA[href = location.href;
 location.href = href.split(".nsf")[0] + ".nsf/adminViewDefinitions.xsp";]]></xp:this.onComplete>
@@ -28,248 +24,349 @@ location.href = href.split(".nsf")[0] + ".nsf/adminViewDefinitions.xsp";]]></xp:
 		</xp:button>
 
 
-	</div> 
+	</div>
 
 	<xp:panel id="panelFormViewDef" styleClass="panelFormViewDef"
 		style="">
 
-		<xp:table id="tableViewDefinition"
-			styleClass="tableViewDefinition tableBasic">
+		<xp:table id="tableViewDefinition" styleClass="tableViewDefinition tableBasic">
 
 			<xp:tr>
 				<xp:td style="width:125px">
 
-					<xp:label value="View Definition" id="label1"
-						styleClass="labelBlack">
+					<xp:label value="View Definition" id="label1" styleClass="labelBlack">
 					</xp:label>
 				</xp:td>
 				<xp:td id="cellKey">
 
-					<xp:inputText id="inputText1"
-						value="#{docViewDef.key}" styleClass="form-control fldServiceName"
-						style="width:300px">
+					<xp:inputText id="inputText1" value="#{docViewDef.key}"
+						styleClass="form-control fldServiceName" style="width:300px">
 					</xp:inputText>
 
 				</xp:td>
 				<xp:td style="width:25px">
-					
+
 				</xp:td>
 				<xp:td colspan="2">
 					<b>
-				<xp:label id="label23" styleClass="labelBlack" value="Information that gets passed to DataTables">
-				</xp:label>
-				</b>
+						<xp:label id="label23" styleClass="labelBlack"
+							value="Information that gets passed to DataTables">
+						</xp:label>
+					</b>
 				</xp:td>
-				
-				<xp:td>
-					
-				</xp:td>
-			</xp:tr>
-			<xp:tr>
+
 				<xp:td>
 
-
-					
-				<xp:label value="Use Rest Service" id="label12"
-					styleClass="labelBlack">
-				</xp:label></xp:td>
-				<xp:td>
-
-
-
-					
-				<xp:inputText id="inputText11"
-					value="#{docViewDef.restService}"
-					styleClass="form-control fldServiceName" style="width:300px">
-				</xp:inputText></xp:td>
-				<xp:td>
-
-					
-				</xp:td>
-				<xp:td>
-
-					
-				<xp:label value="Document XPage" id="label6"
-					styleClass="labelBlack">
-				</xp:label></xp:td>
-				<xp:td>
-					
-				<xp:inputText id="inputText4"
-					value="#{docViewDef.xpage}" styleClass="form-control"
-					style="width:300px">
-				</xp:inputText></xp:td>
-				<xp:td>
-					
 				</xp:td>
 			</xp:tr>
 			<xp:tr>
 				<xp:td>
 
-				<xp:label value="Use Rest XPage" id="label13"
-					styleClass="labelBlack">
-				</xp:label></xp:td>
+
+
+					<xp:label value="Use Rest Service" id="label12"
+						styleClass="labelBlack">
+					</xp:label>
+				</xp:td>
 				<xp:td>
 
-					
-				<xp:inputText id="inputText13"
-					value="#{docViewDef.restPage}"
-					styleClass="form-control fldServiceName" style="width:300px">
-				</xp:inputText></xp:td>
+
+
+
+					<xp:inputText id="inputText11" value="#{docViewDef.restService}"
+						styleClass="form-control fldServiceName" style="width:300px">
+					</xp:inputText>
+				</xp:td>
+				<xp:td>
+
+
+				</xp:td>
+				<xp:td>
+
+
+					<xp:label value="Document XPage" id="label6" styleClass="labelBlack">
+					</xp:label>
+				</xp:td>
+				<xp:td>
+
+					<xp:inputText id="inputText4" value="#{docViewDef.xpage}"
+						styleClass="form-control" style="width:300px">
+					</xp:inputText>
+				</xp:td>
+				<xp:td>
+
+				</xp:td>
+			</xp:tr>
+			<xp:tr>
+				<xp:td>
+
+					<xp:label value="Use Rest XPage" id="label13" styleClass="labelBlack">
+					</xp:label>
+				</xp:td>
+				<xp:td>
+
+
+					<xp:inputText id="inputText13" value="#{docViewDef.restPage}"
+						styleClass="form-control fldServiceName" style="width:300px">
+					</xp:inputText>
+				</xp:td>
 				<xp:td>
 
 				</xp:td>
 				<xp:td>
-					
-				<xp:label value="DataTable Class" id="label19"
-					styleClass="labelBlack">
-				</xp:label></xp:td>
+
+					<xp:label value="DataTable Class" id="label19" styleClass="labelBlack">
+					</xp:label>
+				</xp:td>
 				<xp:td>
 
-				<xp:inputText id="inputText18"
-					value="#{docViewDef.tableClass}" styleClass="form-control"
-					style="width:300px">
-				</xp:inputText></xp:td>
+					<xp:inputText id="inputText18" value="#{docViewDef.tableClass}"
+						styleClass="form-control" style="width:300px">
+					</xp:inputText>
+				</xp:td>
 				<xp:td>
-					
+
 				</xp:td>
 			</xp:tr>
 
 			<xp:tr>
 				<xp:td>
 
-					
-				<xp:label value="Use xAgent" id="label16" styleClass="labelBlack">
-				</xp:label></xp:td>
-				<xp:td>
 
-					
-				<xp:inputText id="inputText20"
-					value="#{docViewDef.xagent}"
-					styleClass="form-control fldServiceName" style="width:300px">
-				</xp:inputText></xp:td>
-				<xp:td>
-					
+					<xp:label value="Use xAgent" id="label16" styleClass="labelBlack">
+					</xp:label>
 				</xp:td>
 				<xp:td>
-					
-				<xp:label value="Return Value" id="label14"
-					styleClass="labelBlack">
-				</xp:label></xp:td>
+
+
+					<xp:inputText id="inputText20" value="#{docViewDef.xagent}"
+						styleClass="form-control fldServiceName" style="width:300px">
+					</xp:inputText>
+				</xp:td>
 				<xp:td>
-					<xp:inputText id="inputText3"
-						value="#{docViewDef.returnColumn}" styleClass="form-control"
-						style="width:300px">
-					</xp:inputText></xp:td>
+
+				</xp:td>
+				<xp:td>
+
+					<xp:label value="Return Value" id="label14" styleClass="labelBlack">
+					</xp:label>
+				</xp:td>
+				<xp:td>
+					<xp:inputText id="inputText3" value="#{docViewDef.returnColumn}"
+						styleClass="form-control" style="width:300px">
+					</xp:inputText>
+				</xp:td>
 				<xp:td></xp:td>
 			</xp:tr>
 			<xp:tr>
 				<td>
-				<div class="checkbox">
-				<xp:checkBox text="Load On Init" id="checkBox5"
-					checkedValue="true" uncheckedValue="false"
-					value="#{docViewDef.loadOnInit}">
-				</xp:checkBox>
-				</div>
+					<div class="checkbox">
+						<xp:checkBox text="Load On Init" id="checkBox5"
+							checkedValue="true" uncheckedValue="false" value="#{docViewDef.loadOnInit}">
+						</xp:checkBox>
+					</div>
 				</td>
 				<xp:td>
 
-					
-				
+
+
 				</xp:td>
 				<xp:td>
-					
+
 				</xp:td>
 				<xp:td>
-					
-				<xp:label value="Client Sort (1)" id="label15"
-					styleClass="labelBlack">
-				</xp:label></xp:td>
+
+					<xp:label value="Client Sort (1)" id="label15" styleClass="labelBlack">
+					</xp:label>
+				</xp:td>
 				<xp:td>
-					
-				<xp:inputText id="inputText6"
-					value="#{docViewDef.sortDefault}" styleClass="form-control"
-					style="width:300px">
-				</xp:inputText></xp:td>
+
+					<xp:inputText id="inputText6" value="#{docViewDef.sortDefault}"
+						styleClass="form-control" style="width:300px">
+					</xp:inputText>
+				</xp:td>
 				<xp:td>
-					<xp:radioGroup id="radioGroup1"
-						value="#{docViewDef.sortDefaultOrder}" defaultValue="a">
+					<xp:radioGroup id="radioGroup1" value="#{docViewDef.sortDefaultOrder}"
+						defaultValue="a">
 						<xp:selectItems id="selectItems4">
 							<xp:this.value><![CDATA[#{javascript:["ascending|a","descending|d"];}]]></xp:this.value>
 						</xp:selectItems>
-					</xp:radioGroup></xp:td>
+					</xp:radioGroup>
+				</xp:td>
 			</xp:tr>
 			<xp:tr>
 				<xp:td style="border-top:1px solid #ddd">
-<b>
-				<xp:label value="View Information" id="label17"
-					styleClass="labelBlack">
-				</xp:label>
-				
-				</b>
+					<b>
+						<xp:label value="View Information" id="label17"
+							styleClass="labelBlack">
+						</xp:label>
+
+					</b>
 				</xp:td>
 				<xp:td style="border-top:1px solid #ddd">
 
 				</xp:td>
 				<xp:td>
 
-					
+
 				</xp:td>
 				<xp:td>
 
-					
-				<xp:label value="Client Sort (2)" id="label4"
-					styleClass="labelBlack">
-				</xp:label></xp:td>
+
+					<xp:label value="Client Sort (2)" id="label4" styleClass="labelBlack">
+					</xp:label>
+				</xp:td>
 				<xp:td>
 
-					
-				<xp:inputText id="inputText19"
-					value="#{docViewDef.sortSecond}" styleClass="form-control"
-					style="width:300px">
-				</xp:inputText></xp:td>
+
+					<xp:inputText id="inputText19" value="#{docViewDef.sortSecond}"
+						styleClass="form-control" style="width:300px">
+					</xp:inputText>
+				</xp:td>
 				<xp:td>
 
-				<xp:radioGroup id="radioGroup4"
-					value="#{docViewDef.sortSecondOrder}" defaultValue="a">
-					<xp:selectItems id="selectItems7">
-						<xp:this.value><![CDATA[#{javascript:["ascending|a","descending|d"];}]]></xp:this.value>
-					</xp:selectItems>
-				</xp:radioGroup></xp:td>
+					<xp:radioGroup id="radioGroup4" value="#{docViewDef.sortSecondOrder}"
+						defaultValue="a">
+						<xp:selectItems id="selectItems7">
+							<xp:this.value><![CDATA[#{javascript:["ascending|a","descending|d"];}]]></xp:this.value>
+						</xp:selectItems>
+					</xp:radioGroup>
+				</xp:td>
 			</xp:tr>
 			<xp:tr>
 				<xp:td>
-					
-				<xp:label value="Server" id="label24" styleClass="labelBlack">
-				</xp:label></xp:td>
+
+					<xp:label value="Server" id="label24" styleClass="labelBlack">
+					</xp:label>
+				</xp:td>
 				<xp:td>
-					
-				<xp:comboBox id="comboBox1" value="#{docViewDef.server}" styleClass="form-control" style="width:300px">
-					<xp:selectItem itemLabel="- Select -" itemValue="none" id="selectItem2">
-					</xp:selectItem>
+
+					<xp:comboBox id="comboBox1" value="#{docViewDef.server}"
+						styleClass="form-control" style="width:300px">
+						<xp:selectItem itemLabel="- Select -" itemValue="none"
+							id="selectItem2">
+						</xp:selectItem>
 
 
 
-					
-					<xp:selectItems id="selectItems8">
-						<xp:this.value><![CDATA[#{javascript:admin.getServers()
+
+						<xp:selectItems id="selectItems8">
+							<xp:this.value><![CDATA[#{javascript:admin.getServers()
 
  }]]></xp:this.value>
-					</xp:selectItems>
-				</xp:comboBox></xp:td>
-				<xp:td>
-					
+						</xp:selectItems>
+					</xp:comboBox>
 				</xp:td>
 				<xp:td>
+
+				</xp:td>
+				<xp:td>
+					<xp:label value="Client Sort (3)" id="label7" styleClass="labelBlack">
+					</xp:label>
+					</xp:td>
+				<xp:td>
+
 					
-				<xp:label value="Server Sort" id="label18"
-					styleClass="labelBlack">
-				</xp:label></xp:td>
+				<xp:inputText id="inputText10" value="#{docViewDef.sortThird}" styleClass="form-control" style="width:300px">
+					</xp:inputText>
+					</xp:td>
 				<xp:td>
 					
-				<xp:inputText id="inputText17"
-					value="#{docViewDef.sortServer}" styleClass="form-control"
-					style="width:300px">
-				</xp:inputText></xp:td>
+				<xp:radioGroup id="radioGroup5" value="#{docViewDef.sortThirdOrder}" defaultValue="a">
+						<xp:selectItems id="selectItems9">
+							<xp:this.value><![CDATA[#{javascript:["ascending|a","descending|d"];}]]></xp:this.value>
+						</xp:selectItems>
+					</xp:radioGroup>
+					</xp:td>
+			</xp:tr>
+			<xp:tr>
+				<xp:td>
+
+
+
+					<xp:label value="Database" id="label3" styleClass="labelBlack">
+					</xp:label>
+				</xp:td>
+				<xp:td>
+
+
+
+					<xp:comboBox id="vwDatabase" value="#{docViewDef.database}"
+						styleClass="form-control" style="width:300px">
+						<xp:selectItem itemLabel="- Select -" itemValue="none"
+							id="selectItem1">
+						</xp:selectItem>
+
+
+
+						<xp:eventHandler event="onchange" submit="true"
+							refreshMode="partial" refreshId="tableViewDefinition" id="eventHandler2">
+						</xp:eventHandler>
+						<xp:selectItems id="selectItems1">
+							<xp:this.value><![CDATA[#{javascript:admin.getDatabases()
+
+ }]]></xp:this.value>
+						</xp:selectItems>
+					</xp:comboBox>
+				</xp:td>
+				<xp:td>
+
+				</xp:td>
+				<xp:td>
+					<xp:label value="Client Sort (4)" id="label25" styleClass="labelBlack">
+					</xp:label>
+					<div class="checkbox">
+
+
+						
+					</div>
+				</xp:td>
+				<xp:td>
+					<xp:inputText id="inputText14" value="#{docViewDef.sortFourth}" styleClass="form-control" style="width:300px">
+					</xp:inputText>
+				</xp:td>
+				<xp:td>
+<xp:radioGroup id="radioGroup6" value="#{docViewDef.sortFourthOrder}" defaultValue="a">
+						<xp:selectItems id="selectItems10">
+							<xp:this.value><![CDATA[#{javascript:["ascending|a","descending|d"];}]]></xp:this.value>
+						</xp:selectItems>
+					</xp:radioGroup>
+				</xp:td>
+			</xp:tr>
+			<xp:tr>
+				<xp:td>
+
+
+
+
+					<xp:label value="View" id="label2" styleClass="labelBlack">
+					</xp:label>
+				</xp:td>
+				<xp:td>
+
+
+					<xp:comboBox id="vwName" value="#{docViewDef.displayView}"
+						styleClass="form-control" style="width:300px">
+						<xp:selectItems id="selectItems2">
+							<xp:this.value><![CDATA[#{javascript:admin.getViewList()}]]></xp:this.value>
+						</xp:selectItems>
+						<xp:eventHandler event="onchange" submit="true"
+							refreshMode="partial" refreshId="panelViewDefColumns" id="eventHandler3"
+							onComplete="adminO.viewdef.init()">
+							<xp:this.action><![CDATA[#{javascript:viewScope.viewCols = admin.getView();}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:comboBox>
+				</xp:td>
+				<xp:td></xp:td>
+				<xp:td>
+					<xp:label value="Server Sort" id="label18"
+						styleClass="labelBlack">
+					</xp:label></xp:td>
+				<xp:td>
+					<xp:inputText id="inputText17"
+						value="#{docViewDef.sortServer}" styleClass="form-control"
+						style="width:300px">
+					</xp:inputText></xp:td>
 				<xp:td>
 					<xp:radioGroup id="radioGroup3"
 						value="#{docViewDef.sortServerOrder}" defaultValue="a">
@@ -283,108 +380,30 @@ location.href = href.split(".nsf")[0] + ".nsf/adminViewDefinitions.xsp";]]></xp:
 
 
 
-				<xp:label value="Database" id="label3"
-					styleClass="labelBlack">
-				</xp:label></xp:td>
-				<xp:td>
-
-
-
-				<xp:comboBox id="vwDatabase"
-					value="#{docViewDef.database}" styleClass="form-control"
-					style="width:300px">
-					<xp:selectItem itemLabel="- Select -"
-						itemValue="none" id="selectItem1">
-					</xp:selectItem>
-
-
-
-					<xp:eventHandler event="onchange" submit="true"
-						refreshMode="partial" refreshId="tableViewDefinition"
-						id="eventHandler2">
-					</xp:eventHandler>
-					<xp:selectItems id="selectItems1">
-						<xp:this.value><![CDATA[#{javascript:admin.getDatabases()
-
- }]]></xp:this.value>
-					</xp:selectItems>
-				</xp:comboBox></xp:td>
-				<xp:td>
 
 				</xp:td>
 				<xp:td>
-					<div class="checkbox">
-						
 
+
+				</xp:td>
+				<xp:td></xp:td>
+				<xp:td>
 					<xp:checkBox text="Show pager" id="checkBox10"
 						checkedValue="true" uncheckedValue="false"
 						value="#{docViewDef.showPager}">
-					</xp:checkBox></div>
-				</xp:td>
+					</xp:checkBox></xp:td>
 				<xp:td>
-				<div class="checkbox">
 					<xp:checkBox text="Select Multiple" id="checkBox9"
 						checkedValue="true" uncheckedValue=""
 						value="#{docViewDef.multiSelect}">
-					</xp:checkBox>
-					</div>
-					</xp:td>
-				<xp:td>
-					
-				</xp:td>
-			</xp:tr>
-			<xp:tr>
-				<xp:td>
-
-
-
-
-				<xp:label value="View" id="label2"
-					styleClass="labelBlack">
-				</xp:label></xp:td>
-				<xp:td>
-
-
-				<xp:comboBox id="vwName"
-					value="#{docViewDef.displayView}" styleClass="form-control"
-					style="width:300px">
-					<xp:selectItems id="selectItems2">
-						<xp:this.value><![CDATA[#{javascript:admin.getViewList()}]]></xp:this.value>
-					</xp:selectItems>
-					<xp:eventHandler event="onchange" submit="true"
-						refreshMode="partial" refreshId="panelViewDefColumns"
-						id="eventHandler3" onComplete="adminO.viewdef.init()">
-						<xp:this.action><![CDATA[#{javascript:viewScope.viewCols = admin.getView();}]]></xp:this.action>
-					</xp:eventHandler>
-				</xp:comboBox></xp:td>
-				<xp:td></xp:td>
-				<xp:td></xp:td>
-				<xp:td>
-					</xp:td>
-				<xp:td></xp:td>
-			</xp:tr>
-			<xp:tr>
-				<xp:td>
-
-
-
-					
-				</xp:td>
-				<xp:td>
-
-
-				</xp:td>
-				<xp:td></xp:td>
-				<xp:td></xp:td>
-				<xp:td>
-					</xp:td>
+					</xp:checkBox></xp:td>
 				<xp:td></xp:td>
 			</xp:tr>
 
 		</xp:table>
-		<xp:label value="Filter" id="label5"
-						styleClass="labelBlack" rendered="false">
-					</xp:label>
+		<xp:label value="Filter" id="label5" styleClass="labelBlack"
+			rendered="false">
+		</xp:label>
 		<xp:inputText id="inputText12" value="#{docViewDef.query}"
 			styleClass="form-control" rendered="false">
 		</xp:inputText>
@@ -469,15 +488,13 @@ return html}]]></xp:this.value>
 			<xp:button value="Hidden - btnReorder" id="button4"
 				styleClass="btnReorder" style="display:none">
 				<xp:eventHandler event="onclick" submit="true"
-					refreshMode="partial" refreshId="panelFormViewDef"
-					id="eventHandler8">
+					refreshMode="partial" refreshId="panelFormViewDef" id="eventHandler8">
 					<xp:this.action><![CDATA[#{javascript:ccRestView.resortViewDef();
 }]]></xp:this.action>
 				</xp:eventHandler>
 			</xp:button>
 
-			<xp:table
-				styleClass="viewDefinitionColumns display hover stripe"
+			<xp:table styleClass="viewDefinitionColumns display hover stripe"
 				id="tableViewDef">
 				<thead>
 					<xp:tr>
@@ -485,8 +502,7 @@ return html}]]></xp:this.value>
 
 						<th></th>
 						<th>
-							<xp:label value="Column Title"
-								id="label20">
+							<xp:label value="Column Title" id="label20">
 							</xp:label>
 						</th>
 						<th>
@@ -504,11 +520,7 @@ return html}]]></xp:this.value>
 							<xp:label value="Width" id="label8">
 							</xp:label>
 						</th>
-						<th>
 
-							<xp:label value="Max Width" id="label7">
-							</xp:label>
-						</th>
 						<th>
 
 							<xp:label value="Overflow" id="label9">
@@ -522,15 +534,13 @@ return html}]]></xp:this.value>
 							<xp:label value="Justify" id="label11">
 							</xp:label>
 						</th>
-						<th></th>
-						<th></th>
+
 						<th></th>
 						<th></th>
 						<th></th>
 					</xp:tr>
 				</thead>
-				<xp:repeat id="repeat1" rows="100" var="col"
-					indexVar="colIndex"
+				<xp:repeat id="repeat1" rows="100" var="col" indexVar="colIndex"
 					value="#{javascript:return viewScope.viewCols}">
 
 
@@ -550,140 +560,167 @@ if (viewScope.viewCols[colIndex].hasOwnProperty("delColumn")) {
 }]]></xp:this.styleClass>
 
 						<xp:this.attrs>
-							<xp:attr name="data-item"
-								value="#{viewScope.viewCols[colIndex].itemName}">
+							<xp:attr name="data-item" value="#{viewScope.viewCols[colIndex].itemName}">
 							</xp:attr>
 						</xp:this.attrs>
 
 						<xp:td>
 							<div class="checkbox">
-								<xp:checkBox id="checkBox1"
-									checkedValue="true" uncheckedValue="false"
-									style="margin-left:0">
+								<xp:checkBox id="checkBox1" checkedValue="true"
+									uncheckedValue="false" style="margin-left:0">
 
 									<xp:this.value><![CDATA[#{viewScope.viewCols[colIndex].enabled}]]></xp:this.value>
 								</xp:checkBox>
 							</div>
 						</xp:td>
 						<xp:td>
-							<xp:text escape="true" id="computedField1"
-								rendered="false">
+							<xp:text escape="true" id="computedField1" rendered="false">
 								<xp:this.value><![CDATA[#{javascript:col.title == "" ? "*No Title*" : col.title}]]></xp:this.value>
 							</xp:text>
-							<xp:inputText id="inputText16"
-								styleClass="input-sm form-control">
+							<xp:inputText id="inputText16" styleClass="input-sm form-control">
 								<xp:this.value><![CDATA[#{viewScope.viewCols[colIndex].title}]]></xp:this.value>
 							</xp:inputText>
 						</xp:td>
 						<xp:td>
-							<xp:text escape="true" id="computedField2"
-								value="#{javascript:col.itemName}">
+							<xp:text escape="true" id="computedField2" value="#{javascript:col.itemName}">
 							</xp:text>
 						</xp:td>
 						<xp:td>
 
-							<xp:comboBox id="displayType"
-								styleClass="form-control">
+							<xp:comboBox id="displayType" styleClass="form-control">
 								<xp:this.value><![CDATA[#{viewScope.viewCols[colIndex].displayType}]]></xp:this.value>
 								<xp:selectItems id="selectItems3">
 									<xp:this.value><![CDATA[#{javascript:return ["Text|text","Number|number","Currency ($x,xxx)|currency","Currency ($x,xxx.xx)|currencyFull","Icon|icon","Date|date","Date Time|dateTime","Renderer|renderer"]}]]></xp:this.value>
 								</xp:selectItems>
 							</xp:comboBox>
 						</xp:td>
-						<xp:td style="min-width:65px">
-							<xp:inputText id="inputText2"
-								styleClass="input-sm form-control view-def-width">
-								<xp:this.value><![CDATA[#{viewScope.viewCols[colIndex].width}]]></xp:this.value>
-							</xp:inputText>
-							px
+						<xp:td style="min-width:100px">
+							<div style="margin-bottom:5px">
+								<xp:inputText id="inputText2"
+									styleClass="input-sm form-control view-def-width">
+									<xp:this.value><![CDATA[#{viewScope.viewCols[colIndex].width}]]></xp:this.value>
+									<xp:this.attrs>
+										<xp:attr name="placeholder" value="width">
+										</xp:attr>
+									</xp:this.attrs>
+								</xp:inputText>
+								px
+							</div>
+							<div>
+								<xp:inputText id="inputText7"
+									styleClass="input-sm form-control view-def-width">
+									<xp:this.value><![CDATA[#{viewScope.viewCols[colIndex].widthMax}]]></xp:this.value>
+									<xp:this.attrs>
+										<xp:attr name="placeholder" value="max-width">
+										</xp:attr>
+									</xp:this.attrs>
+								</xp:inputText>
+								px
+							</div>
 						</xp:td>
-						<xp:td style="min-width:65px">
 
-							<xp:inputText id="inputText7"
-								styleClass="input-sm form-control view-def-width">
-								<xp:this.value><![CDATA[#{viewScope.viewCols[colIndex].widthMax}]]></xp:this.value>
-							</xp:inputText>
-							px
-						</xp:td>
-						<xp:td style="min-width:50px">
+						<xp:td style="min-width:130px">
 
 							<xp:inputText id="inputText8"
-								styleClass="input-sm form-control view-def-width"
-								rendered="false">
+								styleClass="input-sm form-control view-def-width" rendered="false">
 								<xp:this.value><![CDATA[#{viewScope.viewCols[colIndex].chars}]]></xp:this.value>
 							</xp:inputText>
-							<xp:checkBox text="Hide Overflow"
-								id="checkBox4" checkedValue="true">
-								<xp:this.value><![CDATA[#{viewScope.viewCols[colIndex].overflowHide}]]></xp:this.value>
-							</xp:checkBox>
-						</xp:td>
-						<xp:td style="min-width:75px">
-
-							<xp:inputText id="inputText9"
-								styleClass="input-sm form-control">
-								<xp:this.value><![CDATA[#{viewScope.viewCols[colIndex].className}]]></xp:this.value>
-							</xp:inputText>
-
-						</xp:td>
-						<xp:td style="min-width:120px"
-							id="cellJustify">
-
-							<xp:radioGroup id="radioGroup2">
-								<xp:this.value><![CDATA[#{viewScope.viewCols[colIndex].justify}]]></xp:this.value>
-								<xp:selectItems id="selectItems5">
-									<xp:this.value><![CDATA[#{javascript:["left","center","right"]}]]></xp:this.value>
-								</xp:selectItems>
-							</xp:radioGroup>
-							
-						</xp:td>
-						<xp:td>
 							<div class="checkbox">
-								<xp:checkBox text="Hidden"
-									id="checkBox2" checkedValue="true" uncheckedValue="false">
+								<xp:checkBox text="Hide Overflow" id="checkBox4"
+									checkedValue="true">
+									<xp:this.value><![CDATA[#{viewScope.viewCols[colIndex].overflowHide}]]></xp:this.value>
+								</xp:checkBox>
+							</div>
+							<div class="checkbox">
+								<xp:checkBox text="Hide Column" id="checkBox2"
+									checkedValue="true" uncheckedValue="false">
 									<xp:this.value><![CDATA[#{viewScope.viewCols[colIndex].hidden}]]></xp:this.value>
 								</xp:checkBox>
 							</div>
 						</xp:td>
-						<xp:td>
-							<div class="checkbox">
-								<xp:checkBox text="Sortable"
-									id="checkBox3" checkedValue="true" uncheckedValue="false"
-									styleClass="">
-									<xp:this.value><![CDATA[#{viewScope.viewCols[colIndex].sortable}]]></xp:this.value>
-								</xp:checkBox>
+						<xp:td style="min-width:75px">
+
+							<xp:inputText id="inputText9" styleClass="input-sm form-control">
+								<xp:this.value><![CDATA[#{viewScope.viewCols[colIndex].className}]]></xp:this.value>
+							</xp:inputText>
+
+						</xp:td>
+						<xp:td style="min-width:120px" id="cellJustify">
+							<div class="radio">
+								<xp:radioGroup id="radioGroup2" layout="pageDirection">
+									<xp:this.value><![CDATA[#{viewScope.viewCols[colIndex].justify}]]></xp:this.value>
+									<xp:selectItems id="selectItems5">
+										<xp:this.value><![CDATA[#{javascript:["left","center","right"]}]]></xp:this.value>
+									</xp:selectItems>
+								</xp:radioGroup>
 							</div>
 						</xp:td>
-						<xp:td>
+						<xp:td style="min-width:100px">
 
 							<div class="checkbox">
-								<xp:checkBox text="Avg" id="checkBox8"
+								<xp:checkBox text="Disable Sort" id="checkBox3"
+									checkedValue="true" uncheckedValue="false" styleClass="">
+									<xp:this.value><![CDATA[#{viewScope.viewCols[colIndex].sortDisable}]]></xp:this.value>
+								</xp:checkBox>
+							</div>
+							<div class="checkbox">
+								<xp:checkBox text="Avg Values" id="checkBox8"
 									checkedValue="true" uncheckedValue="false">
 									<xp:this.value><![CDATA[#{viewScope.viewCols[colIndex].avg}]]></xp:this.value>
 								</xp:checkBox>
 							</div>
 						</xp:td>
-						<xp:td>
+
+						<xp:td style="min-width:100px">
 
 							<div class="checkbox">
-								<xp:text escape="true"
-									id="computedField3" value="#{javascript:col.formula}"
-									rendered="false">
-								</xp:text>
-								<xp:checkBox text="Total" id="checkBox6"
-									checkedValue="true" uncheckedValue="false">
+								<xp:checkBox text="Total Rows" id="checkBox6"
+									checkedValue="true" uncheckedValue="false" styleClass="totalCheckRows">
 									<xp:this.value><![CDATA[#{viewScope.viewCols[colIndex].total}]]></xp:this.value>
+								</xp:checkBox>
+							</div>
+							<div class="checkbox">
+								<xp:checkBox text="Total Values" id="checkBox11"
+									checkedValue="true" uncheckedValue="false" styleClass="totalCheckValues">
+									<xp:this.value><![CDATA[#{viewScope.viewCols[colIndex].totalValue}]]></xp:this.value>
 								</xp:checkBox>
 							</div>
 						</xp:td>
 						<xp:td>
 
-							<div class="checkbox">
+							<div class="checkbox" style="">
 
-								<xp:checkBox text="Category"
-									id="checkBox7" checkedValue="true" uncheckedValue="false">
+								<xp:checkBox text="Category" id="checkBox7"
+									checkedValue="true" uncheckedValue="false">
 									<xp:this.value><![CDATA[#{viewScope.viewCols[colIndex].category}]]></xp:this.value>
 								</xp:checkBox>
 							</div>
+							<div class="checkbox" style="">
+
+								<xp:checkBox text="Renderer"
+									id="checkBox12" checkedValue="true" uncheckedValue="false">
+
+									<xp:this.attrs>
+										<xp:attr name="data-renderer">
+											<xp:this.value><![CDATA[#{javascript:if ((typeof viewScope.viewCols[colIndex].category) == "undefined") {return "";} if (viewScope.viewCols[colIndex].category != "") {
+	return viewScope.viewCols[colIndex].category;
+}}]]></xp:this.value>
+										</xp:attr>
+									</xp:this.attrs>
+									<xp:this.value><![CDATA[#{javascript:if (viewScope.viewCols[colIndex].categoryRenderer != "" && viewScope.viewCols[colIndex].categoryRenderer != null) {
+	return "true"
+}
+return "false"}]]></xp:this.value>
+									</xp:checkBox>
+							</div>
+
+							<xp:inputText id="inputText5"
+								styleClass="category-renderer form-control input-sm"
+								style="padding:2px 5px;display:none"
+								value="#{viewScope.viewCols[colIndex].categoryRenderer}">
+
+							</xp:inputText>
+
 						</xp:td>
 					</xp:tr>
 
@@ -693,11 +730,33 @@ if (viewScope.viewCols[colIndex].hasOwnProperty("delColumn")) {
 
 				<xp:this.value><![CDATA[$(document).ready(function() {
 	adminO.viewdef.init();
+	adminO.viewdef.totalCheck();
+	adminO.viewdef.categoryRenderers();
 })
 
 ]]></xp:this.value>
 			</xp:scriptBlock>
 		</xp:panel>
 	</xp:panel>
-
+	<div class="panelCategoryRenderer" style="">
+		<div class="panelCategoryRendererTitle" style="background:#ddd">
+			Category Renderer for: 
+			<span class="column-renderer-index"></span>
+		</div>
+		<div class="panelCategoryRendererBody">
+			<xp:inputTextarea id="inputTextarea1"></xp:inputTextarea>
+		</div>
+		<div class="panelRendererFooter rightText">
+			<xp:button value="Clear" id="button1" styleClass="btn btn-sm btn-default">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script><![CDATA[adminO.renderer.cancel()]]></xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:button value="Done" id="button3" styleClass="btn btn-sm btn-default" style="margin:0 5px">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script><![CDATA[adminO.renderer.update()]]></xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+		</div>
+	</div>
 </xp:view>
