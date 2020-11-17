@@ -916,7 +916,7 @@ var ccRestView = {
 	},
 	groups : {
 		buildGroupRows : function(o,api,rows) {
-			if (o.groupCols.length == 0) {return;}
+			if (o.columnCategory.length == 0) {return;}
 			console.log("### START BUILDGROUPROWS ###");
 
 			var thisView = window.getFunctionFromString(o.thisView);
