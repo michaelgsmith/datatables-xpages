@@ -347,7 +347,7 @@ var ccRestView = {
  				itemIndex = viewColIndexes[vwDoc.getItemValueString('sortSecond')];
  				v.push([itemIndex,vwDoc.getItemValueString('sortSecondtOrder') == "d" ? "desc" : "asc"]);
  			}
- 			return v; 			
+ 			return toJson(v); 			
  		}
 
  	},
