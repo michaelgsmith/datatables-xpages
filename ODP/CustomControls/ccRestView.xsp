@@ -7,7 +7,7 @@
 		<xp:this.styleClass><![CDATA[#{javascript:"panel" + compositeData.thisView + " panelRestViewContainer" + (compositeData.showFixedHeader ? "" : " no-fixed-header")}]]></xp:this.styleClass>
 
 		<xp:table style="width:100%;">
-
+ 
 			<xp:this.attrs>
 				<xp:attr name="class">
 					<xp:this.value><![CDATA[#{javascript:compositeData.dataTableClassDefault == null ? "display tableRest" : compositeData.dataTableClassDefault + " tableRest" }]]></xp:this.value>

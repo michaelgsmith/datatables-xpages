@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?eclipse version="3.0"?>
 <plugin class="plugin.Activator" id="datatables-xpages"
   name="Domino Designer" provider="TODO" version="1.0.0">
   <requires>
@@ -22,3 +21,4 @@
     <!--AUTOGEN-END-BUILDER: End of automatically generated section-->
   </requires>
 </plugin>
+<?eclipse version="3.0"?>

@@ -287,5 +287,9 @@ false</editor-parameter>
         </designer-extension>
       </property-extension>
     </property>
+    <property>
+      <property-name>footerCallback</property-name>
+      <property-class>string</property-class>
+    </property>
   </composite-component>
 </faces-config>
