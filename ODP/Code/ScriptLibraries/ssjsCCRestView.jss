@@ -235,10 +235,21 @@ var admin = {
 	config : {
 		save : function() {
 			var saveFlag = configDoc.save();
-			print("saveFlag="+saveFlag);
+			
 			if (saveFlag) {
+				// update viewScopes for computed fields
+				admin.config.init();
 				view.postScript("alert('Configuration saved successfully.')")
 			}
+		},
+		init : function() {
+			// try to find a config doc
+			var docid = @DbLookup(@DbName(),"vwConfig","config",1,"[RETURNDOCUMENTUNIQUEID]");
+			viewScope.configDocid=docid;
+
+			var viewdef = @DbLookup(@DbName(),"vwAdminViewDefinitions","view-definitions",1,"[RETURNDOCUMENTUNIQUEID]");
+
+			viewScope.viewDefCreated = (typeof viewdef) == "undefined" ? false : true;
 		}
 	}
 };

@@ -9,13 +9,7 @@
 			<xp:this.documentId><![CDATA[#{javascript:viewScope.configDocid == null ? "" : viewScope.configDocid}]]></xp:this.documentId>
 		</xp:dominoDocument>
 	</xp:this.data>
-	<xp:this.beforePageLoad><![CDATA[#{javascript:// try to find a config doc
-var docid = @DbLookup(@DbName(),"vwConfig","config",1,"[RETURNDOCUMENTUNIQUEID]");
-viewScope.configDocid=docid;
-
-var viewdef = @DbLookup(@DbName(),"vwAdminViewDefinitions","view-definitions",1,"[RETURNDOCUMENTUNIQUEID]");
-
-viewScope.viewDefCreated = (typeof viewdef) == "undefined" ? false : true;
+	<xp:this.beforePageLoad><![CDATA[#{javascript:admin.config.init()
 }]]></xp:this.beforePageLoad>
 	<div class="level0-flex-container">
 		<div class="level0-flex-item">
