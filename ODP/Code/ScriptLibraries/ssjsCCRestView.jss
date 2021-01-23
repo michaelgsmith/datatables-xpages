@@ -217,7 +217,7 @@ var admin = {
 			vdoc.replaceItemValue("form","adminViewDefinition");
 			vdoc.replaceItemValue("key","view-definitions");
 			vdoc.replaceItemValue("restPage","restServices");
-			vdoc.replaceItemValue("database","*current database*~demos/fvc_develop_20201026.nsf");
+			vdoc.replaceItemValue("database","*current database*~"+@ReplaceSubstring(@DbName()[1],"\\","/"));
 			vdoc.replaceItemValue("displayView","Admin\\View Definitions");
 			vdoc.replaceItemValue("server","currentserver");
 			vdoc.replaceItemValue("loadOnInit","true");

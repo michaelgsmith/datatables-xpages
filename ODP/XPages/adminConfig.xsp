@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom" styleClass="flexLayoutx">
 	<xp:this.resources>
 		<xp:script src="/ssjsCCRestView.jss" clientSide="false"></xp:script>
 	</xp:this.resources>
@@ -18,13 +18,18 @@
 		</div>
 		<div class="level0-flex-item">
 
-			<xp:table id="tableConfig" style="width:50%;margin-top:25px"
+			<xp:table id="tableConfig" style="max-width:950px;width:100%;margin-top:25px"
 				styleClass="tableBasic">
 				<xp:tr>
 					<xp:td style="width:200px">
 						<xp:label value="Rest Service Path" id="label1"></xp:label>
+						<p style="font-family:'Times New Roman';color:#666;font-style:italic;margin-top:7px;padding-left:10px">
+						This should be a database where REST services reside on this server.
+						Enter a path in the format 'path/myrestdb.nsf'.<br></br>
+						
+						</p>
 					</xp:td>
-					<xp:td>
+					<xp:td style="vertical-align:top">
 						<xp:inputText id="inputText1" value="#{configDoc.restPath}"
 							styleClass="form-control input-sm" style="width:100%">
 							<xp:this.attrs>
@@ -35,8 +40,12 @@
 					</xp:td>
 				</xp:tr>
 				<xp:tr>
-					<xp:td style="vertical-align:top">
+					<xp:td style="vertical-align:top;width:300px">
 						<xp:label value="Servers" id="label3"></xp:label>
+
+						<p style="font-family:'Times New Roman';color:#666;font-style:italic;margin-top:7px;padding-left:10px">
+						Servers (not including the current server) that contain the databases with view designs that need to be read by View Definitions.
+						</p>
 					</xp:td>
 					<xp:td>
 						<xp:inputTextarea id="inputTextarea2"
@@ -52,6 +61,10 @@
 				<xp:tr>
 					<xp:td style="vertical-align:top">
 						<xp:label value="Databases" id="label2"></xp:label>
+						<p style="font-family:'Times New Roman';color:#666;font-style:italic;margin-top:7px;padding-left:10px">
+						Databases that contain the views that need to be read into View Definitions.
+						Enter one per line in the format 'description~path\mydb.nsf'.
+						</p>
 					</xp:td>
 					<xp:td>
 						<xp:inputTextarea id="inputTextarea1"
@@ -59,7 +72,7 @@
 							value="#{configDoc.databases}" style="width:100%" styleClass="form-control">
 							<xp:this.attrs>
 								<xp:attr name="placeholder"
-									value="Enter one value per line in the format 'description~path/mydb.nsf'">
+									value="Enter one value per line in the format 'description~path\mydb.nsf'">
 								</xp:attr>
 							</xp:this.attrs>
 						</xp:inputTextarea>
