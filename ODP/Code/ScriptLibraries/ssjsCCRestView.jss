@@ -112,6 +112,19 @@ var admin = {
 				print(e.toString())
 			}
 		}, // end save
+		clone : function() {
+			// take the existing view definition and make a copy
+			// then open that copy
+			
+			var saveFlag = docViewDef.save();
+			
+			var doc:NotesDocument = docViewDef.getDocument();
+			var newdoc:NotesDocument = doc.copyToDatabase(database);
+			newdoc.replaceItemValue('key',docViewDef.getValue('key')+'-copy');
+			newdoc.save(true, false);
+			var url = context.getUrl().getAddress().split('?')[0] + '?documentId='+newdoc.getUniversalID()+'&action=editDocument';
+			view.postScript('location.href="'+url+'"')
+		},
 		beforePageLoad : function() {
 			try {
 				var url : XSPUrl;
