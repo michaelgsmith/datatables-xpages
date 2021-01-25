@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom" styleClass="flexLayoutx">
 	<xp:this.resources>
 		<xp:script src="/ssjsCCRestView.jss" clientSide="false"></xp:script>
 	</xp:this.resources>
@@ -9,13 +9,7 @@
 			<xp:this.documentId><![CDATA[#{javascript:viewScope.configDocid == null ? "" : viewScope.configDocid}]]></xp:this.documentId>
 		</xp:dominoDocument>
 	</xp:this.data>
-	<xp:this.beforePageLoad><![CDATA[#{javascript:// try to find a config doc
-var docid = @DbLookup(@DbName(),"vwConfig","config",1,"[RETURNDOCUMENTUNIQUEID]");
-viewScope.configDocid=docid;
-
-var viewdef = @DbLookup(@DbName(),"vwAdminViewDefinitions","view-definitions",1,"[RETURNDOCUMENTUNIQUEID]");
-
-viewScope.viewDefCreated = (typeof viewdef) == "undefined" ? false : true;
+	<xp:this.beforePageLoad><![CDATA[#{javascript:admin.config.init()
 }]]></xp:this.beforePageLoad>
 	<div class="level0-flex-container">
 		<div class="level0-flex-item">
@@ -23,14 +17,18 @@ viewScope.viewDefCreated = (typeof viewdef) == "undefined" ? false : true;
 			<xc:ccNav></xc:ccNav>
 		</div>
 		<div class="level0-flex-item">
+<h4>
+Flexible View Control for XPages - Configuration
+</h4>
 
-			<xp:table id="tableConfig" style="width:50%;margin-top:25px"
+			<xp:table id="tableConfig" style="max-width:950px;width:100%;margin-top:25px"
 				styleClass="tableBasic">
 				<xp:tr>
-					<xp:td style="width:200px">
+					<xp:td style="width:400px">
 						<xp:label value="Rest Service Path" id="label1"></xp:label>
+						
 					</xp:td>
-					<xp:td>
+					<xp:td style="vertical-align:top">
 						<xp:inputText id="inputText1" value="#{configDoc.restPath}"
 							styleClass="form-control input-sm" style="width:100%">
 							<xp:this.attrs>
@@ -40,13 +38,28 @@ viewScope.viewDefCreated = (typeof viewdef) == "undefined" ? false : true;
 						</xp:inputText>
 					</xp:td>
 				</xp:tr>
+				<tr>
+				<td colspan="2">
+				<ul style="font-family:'Times New Roman';color:#666;font-style:italic;margin-top:7px;">
+						<li>A database where REST services reside on this server.</li>
+						<li>Enter a path in the format 'path/myrestdb.nsf'.</li>
+						
+						</ul>
+				</td>
+				</tr>
 				<xp:tr>
-					<xp:td style="vertical-align:top">
+					<xp:td style="vertical-align:top;">
 						<xp:label value="Servers" id="label3"></xp:label>
+
+						<ul style="font-family:'Times New Roman';color:#666;font-style:italic;margin-top:7px;">
+						<li>Servers (not including the current server) that contain the databases with view designs that need to be read by View Definitions.</li>
+						<li>Enter one server per line.</li>
+						<li>Populates a dropdown on the View Definition</li>
+						</ul>
 					</xp:td>
 					<xp:td>
 						<xp:inputTextarea id="inputTextarea2"
-							multipleSeparator="#{javascript:@NewLine()}" rows="8"
+							multipleSeparator="#{javascript:@NewLine()}" rows="6"
 							value="#{configDoc.servers}" style="width:100%" styleClass="form-control">
 							<xp:this.attrs>
 								<xp:attr name="placeholder" value="Enter one value per line">
@@ -58,10 +71,15 @@ viewScope.viewDefCreated = (typeof viewdef) == "undefined" ? false : true;
 				<xp:tr>
 					<xp:td style="vertical-align:top">
 						<xp:label value="Databases" id="label2"></xp:label>
+						<ul style="font-family:'Times New Roman';color:#666;font-style:italic;margin-top:7px">
+						<li>Databases (not including the current database) that contain views that need to be read into View Definitions.</li>
+						<li>Enter one database&#160;per line in the format 'description~path/mydb.nsf'.</li>
+						<li>Populates a dropdown on the View Definition</li>
+						</ul>
 					</xp:td>
 					<xp:td>
 						<xp:inputTextarea id="inputTextarea1"
-							multipleSeparator="#{javascript:@NewLine()}" rows="8"
+							multipleSeparator="#{javascript:@NewLine()}" rows="6"
 							value="#{configDoc.databases}" style="width:100%" styleClass="form-control">
 							<xp:this.attrs>
 								<xp:attr name="placeholder"
@@ -72,10 +90,10 @@ viewScope.viewDefCreated = (typeof viewdef) == "undefined" ? false : true;
 					</xp:td>
 				</xp:tr>
 				<tr>
-					<td colspan="2">
+					<td colspan="2" style="padding-top:10px">
 						<div>
 							<xp:button id="button1"
-								value="Step1. Save Configuration" styleClass="btn btn-primary"
+								value="Step 1. Save Configuration" styleClass="btn btn-primary"
 								style="width:225px;text-align:left">
 								<xp:eventHandler event="onclick"
 									submit="true" refreshMode="partial" refreshId="tableConfig">
@@ -83,10 +101,9 @@ viewScope.viewDefCreated = (typeof viewdef) == "undefined" ? false : true;
 								</xp:eventHandler>
 							</xp:button>
 							<xp:text escape="true"
-								id="computedField1"  style="margin-left:10px;font-weight:bold">
-							<xp:this.value><![CDATA[#{javascript:viewScope.configDocid != null ? "Complete" : ""}]]></xp:this.value></xp:text>
-						</div>
-						<div style="margin-top:10px">
+								id="computedField1"  style="margin:0 50px 0 10px;font-weight:bold">
+							<xp:this.value><![CDATA[#{javascript:viewScope.configDocid != null ? "Complete" : "Pending"}]]></xp:this.value></xp:text>
+						
 							<xp:button
 								value="Step 2. Create view-definitions" id="button3"
 								styleClass="btn btn-primary"
@@ -99,8 +116,8 @@ viewScope.viewDefCreated = (typeof viewdef) == "undefined" ? false : true;
 
 							</xp:button>
 							<xp:text escape="true"
-								id="computedField2" style="margin-left:10px;font-weight:bold">
-							<xp:this.value><![CDATA[#{javascript:viewScope.viewDefCreated ? "Complete" : ""}]]></xp:this.value></xp:text>
+								id="computedField2" style="margin:0 10px;font-weight:bold">
+							<xp:this.value><![CDATA[#{javascript:viewScope.viewDefCreated ? "Complete" : "Pending"}]]></xp:this.value></xp:text>
 						</div>
 						<div style="margin-top:10px">
 							<xp:button value="Create New View Definition" id="button2"

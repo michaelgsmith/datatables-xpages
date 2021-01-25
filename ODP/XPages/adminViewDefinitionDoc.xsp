@@ -14,12 +14,23 @@
 	<xc:ccNav></xc:ccNav>
 	<div class="actionBar">
 
-		<xp:button value="Save" id="button2" styleClass="btn btn-primary btn-sm">
+		<xp:button value="Save" id="button2" styleClass="btn btn-primary btn-sm" style='margin-right:10px'>
 			<xp:eventHandler event="onclick" submit="true"
 				refreshMode="partial" refreshId="panelFormViewDef" id="eventHandler4">
 				<xp:this.action><![CDATA[#{javascript:admin.viewdef.save()}]]></xp:this.action>
 				<xp:this.onComplete><![CDATA[href = location.href;
 location.href = href.split(".nsf")[0] + ".nsf/adminViewDefinitions.xsp";]]></xp:this.onComplete>
+			</xp:eventHandler>
+		</xp:button>
+
+
+		<xp:button value="Clone" id="button5"
+			styleClass="btn btn-warning btn-sm">
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="partial" refreshId="panelFormViewDef"
+				id="eventHandler1">
+				<xp:this.action><![CDATA[#{javascript:admin.viewdef.clone()}]]></xp:this.action>
+				
 			</xp:eventHandler>
 		</xp:button>
 

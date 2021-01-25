@@ -81,11 +81,27 @@ var ccRestView = {
 							return o.value;
 							break;
 						case "icon":
+							try {
+								// if data is json then parse it
+								var j = JSON.parse(data);
+							} catch(e) {
+								var j = data;
+							}
+							
 							if (type == "display") {
-								var fa = data.indexOf("class:") > -1 ? strRight(data,":") : o.icon;							
-								return "<div class='center'><i class='fa " + fa + "'></i></div>";
+									
+								if ((typeof j) == "object") {
+									var fa = j.icon;
+								} else {
+									var fa = '';
+								}
+								return "<div class='center'><i class='fa " + fa + "'></i></div>";						
+								
 							} else {
-								return "";
+								if ((typeof j) == "object") {
+									return (j.value != null ? j.value : '');
+								} 
+								return '';
 							}
 							break;
 						case "date":
@@ -216,6 +232,11 @@ var ccRestView = {
 						"categoryRenderer": viewJson[x].categoryRenderer,
 						"itemName": viewJson[x].itemName
 					});
+				}
+				
+				// check to see if sort is disabled
+				if (viewJson[x].sortDisable=='true') {
+					column.orderable=false;
 				}
 				
 				columns.push(column);

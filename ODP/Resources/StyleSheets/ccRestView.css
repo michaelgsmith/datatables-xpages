@@ -9,6 +9,7 @@ body.flexLayout, form {
 	flex-direction:column;
 	height:calc(100vh - 60px);	
 	height:100vh;
+	overflow:auto;
 }
 .level0-flex-middle {
 	flex:1;

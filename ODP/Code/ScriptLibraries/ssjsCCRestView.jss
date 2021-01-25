@@ -112,6 +112,19 @@ var admin = {
 				print(e.toString())
 			}
 		}, // end save
+		clone : function() {
+			// take the existing view definition and make a copy
+			// then open that copy
+			
+			var saveFlag = docViewDef.save();
+			
+			var doc:NotesDocument = docViewDef.getDocument();
+			var newdoc:NotesDocument = doc.copyToDatabase(database);
+			newdoc.replaceItemValue('key',docViewDef.getValue('key')+'-copy');
+			newdoc.save(true, false);
+			var url = context.getUrl().getAddress().split('?')[0] + '?documentId='+newdoc.getUniversalID()+'&action=editDocument';
+			view.postScript('location.href="'+url+'"')
+		},
 		beforePageLoad : function() {
 			try {
 				var url : XSPUrl;
@@ -217,7 +230,7 @@ var admin = {
 			vdoc.replaceItemValue("form","adminViewDefinition");
 			vdoc.replaceItemValue("key","view-definitions");
 			vdoc.replaceItemValue("restPage","restServices");
-			vdoc.replaceItemValue("database","*current database*~demos/fvc_develop_20201026.nsf");
+			vdoc.replaceItemValue("database","*current database*~"+@ReplaceSubstring(@DbName()[1],"\\","/"));
 			vdoc.replaceItemValue("displayView","Admin\\View Definitions");
 			vdoc.replaceItemValue("server","currentserver");
 			vdoc.replaceItemValue("loadOnInit","true");
@@ -235,10 +248,21 @@ var admin = {
 	config : {
 		save : function() {
 			var saveFlag = configDoc.save();
-			print("saveFlag="+saveFlag);
+			
 			if (saveFlag) {
+				// update viewScopes for computed fields
+				admin.config.init();
 				view.postScript("alert('Configuration saved successfully.')")
 			}
+		},
+		init : function() {
+			// try to find a config doc
+			var docid = @DbLookup(@DbName(),"vwConfig","config",1,"[RETURNDOCUMENTUNIQUEID]");
+			viewScope.configDocid=docid;
+
+			var viewdef = @DbLookup(@DbName(),"vwAdminViewDefinitions","view-definitions",1,"[RETURNDOCUMENTUNIQUEID]");
+
+			viewScope.viewDefCreated = (typeof viewdef) == "undefined" ? false : true;
 		}
 	}
 };

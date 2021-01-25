@@ -60,8 +60,11 @@
 	<!--	
 	<resource>
 		<content-type>text/css</content-type>
-		<href>https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css</href>
+		<href>https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css</href>
 	</resource>
+	
+	https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css
+	https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css
 	-->
 	
 	<resources>
