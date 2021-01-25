@@ -93,7 +93,7 @@ var ccRestView = {
 								if ((typeof j) == "object") {
 									var fa = j.icon;
 								} else {
-									var fa = '';
+									var fa = j;
 								}
 								return "<div class='center'><i class='fa " + fa + "'></i></div>";						
 								
